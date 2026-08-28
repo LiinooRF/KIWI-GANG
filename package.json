@@ -1,0 +1,28 @@
+{
+  "name": "dsy1104_template",
+  "version": "1.0.0",
+  "description": "Template para proyecto transversar fase 1",
+  "homepage": "https://github.com/donkiwicl/fs2_proyecto_template#readme",
+  "bugs": {
+    "url": "https://github.com/donkiwicl/fs2_proyecto_template/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donkiwicl/fs2_proyecto_template.git"
+  },
+  "license": "MIT",
+  "author": "Don Kiwi",
+  "type": "commonjs",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tailwinddev": "npx @tailwindcss/cli -i ./assets/src/style.css -o ./assets/css/style.css --watch"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}
