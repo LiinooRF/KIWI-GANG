@@ -112,3 +112,47 @@ footer a {
     gap: 10px;
   }
 }
+
+/* tarjetas de servicios */
+.servicios h2, .pasos h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--verde-oscuro);
+  margin-bottom: 16px;
+}
+
+.tarjetas {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.tarjeta {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  flex: 1;
+  min-width: 250px;
+}
+
+.tarjeta h3 {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.tarjeta a {
+  color: var(--verde-oscuro);
+  text-decoration: underline;
+}
+
+/* pasos de como funciona */
+.pasos {
+  margin-top: 24px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.pasos li {
+  margin-bottom: 8px;
+}
