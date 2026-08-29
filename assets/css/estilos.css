@@ -1,0 +1,114 @@
+/* hoja de estilos de kiwiexpress */
+
+:root {
+  --verde-kiwi: #6da544;
+  --verde-oscuro: #4c7a2d;
+  --cafe-kiwi: #8b6f47;
+  --gris-fondo: #f4f4f4;
+  --texto: #2b2b2b;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: var(--gris-fondo);
+  color: var(--texto);
+}
+
+/* barra de navegacion */
+.navbar {
+  background-color: var(--verde-oscuro);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  flex-wrap: wrap;
+}
+
+.navbar .logo {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: white;
+}
+
+.navbar ul {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.navbar a {
+  color: white;
+  padding: 6px 8px;
+}
+
+.navbar a:hover {
+  background-color: var(--verde-kiwi);
+  border-radius: 4px;
+}
+
+/* contenido principal */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.hero {
+  background-color: white;
+  border-radius: 8px;
+  padding: 40px 24px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--verde-oscuro);
+  margin-bottom: 12px;
+}
+
+.hero p {
+  margin-bottom: 20px;
+}
+
+.boton {
+  display: inline-block;
+  background-color: var(--verde-kiwi);
+  color: white;
+  padding: 10px 22px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.boton:hover {
+  background-color: var(--verde-oscuro);
+}
+
+/* footer */
+footer {
+  background-color: #333;
+  color: #ddd;
+  padding: 24px 16px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+footer a {
+  color: var(--verde-kiwi);
+}
+
+/* celular */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .navbar ul {
+    justify-content: center;
+    gap: 10px;
+  }
+}
