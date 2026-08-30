@@ -26,9 +26,15 @@
 
   <main>
     <section class="hero">
-      <h1>Seguimiento</h1>
-      <p>Página en construcción</p>
+      <h1>Sigue tu envío</h1>
+      <p>Ingresa tu código de seguimiento y revisa en qué etapa va tu paquete.</p>
+      <div class="buscador">
+        <input type="text" id="codigoEnvio" placeholder="KX-2026-000001">
+        <button class="boton" onclick="buscarEnvio()">Buscar</button>
+      </div>
     </section>
+
+    <section id="resultado"></section>
   </main>
 
   <footer>
@@ -36,5 +42,7 @@
     <p>📞 +56 9 1234 5678 | ✉️ contacto@kiwiexpress.cl</p>
     <p><a href="nosotros.html">Conócenos</a> | <a href="contacto.html">Contáctanos</a></p>
   </footer>
+
+  <script src="./assets/js/envios.js"></script>
 </body>
 </html>

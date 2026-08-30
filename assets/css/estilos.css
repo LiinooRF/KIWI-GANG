@@ -156,3 +156,46 @@ footer a {
 .pasos li {
   margin-bottom: 8px;
 }
+
+/* buscador de seguimiento */
+.buscador {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.buscador input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 260px;
+  background-color: white;
+}
+
+.ficha-envio {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 16px;
+}
+
+.ficha-envio h3 {
+  font-weight: bold;
+  color: var(--verde-oscuro);
+  margin-bottom: 8px;
+}
+
+.ficha-envio .estado {
+  margin-top: 8px;
+  font-weight: bold;
+  color: var(--verde-kiwi);
+}
+
+.error {
+  background-color: #fdecea;
+  color: #b3261e;
+  padding: 12px;
+  border-radius: 6px;
+  margin-top: 16px;
+}
