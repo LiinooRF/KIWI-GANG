@@ -2,6 +2,11 @@
 
 let paquetes = [];
 
+// si habia paquetes guardados de antes se cargan
+if (localStorage.getItem("paquetesEnvio") !== null) {
+  paquetes = JSON.parse(localStorage.getItem("paquetesEnvio"));
+}
+
 // llena el select con las comunas del arreglo de comunas.js
 function cargarComunas() {
   const select = document.getElementById("comuna");
@@ -80,8 +85,15 @@ function agregarPaquete() {
   };
 
   paquetes.push(paquete);
+  localStorage.setItem("paquetesEnvio", JSON.stringify(paquetes));
   mostrarPaquetes();
   document.getElementById("formPaquete").reset();
+}
+
+function quitarPaquete(indice) {
+  paquetes.splice(indice, 1);
+  localStorage.setItem("paquetesEnvio", JSON.stringify(paquetes));
+  mostrarPaquetes();
 }
 
 function mostrarPaquetes() {
@@ -92,14 +104,62 @@ function mostrarPaquetes() {
     return;
   }
 
-  let html = '<table class="tabla-paquetes"><tr><th>Descripción</th><th>Peso</th><th>Medidas</th><th>Valor</th><th>Categoría</th></tr>';
+  let html = '<table class="tabla-paquetes"><tr><th>Descripción</th><th>Peso</th><th>Medidas</th><th>Valor</th><th>Categoría</th><th></th></tr>';
+  let total = 0;
   for (let i = 0; i < paquetes.length; i++) {
     const p = paquetes[i];
+    total = total + p.valor;
     html += "<tr><td>" + p.descripcion + "</td><td>" + p.peso + " kg</td><td>" +
-      p.alto + "x" + p.ancho + "x" + p.largo + " cm</td><td>$" + p.valor + "</td><td>" + p.categoria + "</td></tr>";
+      p.alto + "x" + p.ancho + "x" + p.largo + " cm</td><td>$" + p.valor + "</td><td>" + p.categoria +
+      '</td><td><a href="#" onclick="quitarPaquete(' + i + ')">quitar</a></td></tr>';
   }
   html += "</table>";
   lista.innerHTML = html;
+  document.getElementById("totalDeclarado").innerHTML = "<strong>Total valor declarado: $" + total + "</strong>";
+}
+
+function enviarSolicitud() {
+  limpiarErrores();
+  document.getElementById("mensajeExito").innerHTML = "";
+
+  const nombres = document.getElementById("nombres").value.trim();
+  const apellido = document.getElementById("apellido").value.trim();
+  const comuna = document.getElementById("comuna").value;
+
+  let valido = true;
+
+  if (nombres === "") {
+    mostrarError("errorNombres", "Ingresa el nombre del destinatario");
+    valido = false;
+  }
+  if (apellido === "") {
+    mostrarError("errorApellido", "Ingresa el apellido del destinatario");
+    valido = false;
+  }
+  if (comuna === "") {
+    mostrarError("errorComuna", "Selecciona la comuna de destino");
+    valido = false;
+  }
+  if (paquetes.length === 0) {
+    mostrarError("errorEnvio", "Agrega al menos un paquete antes de enviar");
+    valido = false;
+  }
+
+  if (!valido) {
+    return;
+  }
+
+  const numero = Math.floor(Math.random() * 900000) + 100000;
+  const codigo = "KX-2026-" + numero;
+
+  document.getElementById("mensajeExito").innerHTML =
+    '<div class="ficha-envio"><h3>Solicitud enviada ✅</h3><p>Tu código de seguimiento es <strong>' + codigo + '</strong></p></div>';
+
+  paquetes = [];
+  localStorage.removeItem("paquetesEnvio");
+  mostrarPaquetes();
+  document.getElementById("formDestinatario").reset();
 }
 
 cargarComunas();
+mostrarPaquetes();
