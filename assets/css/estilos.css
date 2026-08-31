@@ -199,3 +199,14 @@ footer a {
   border-radius: 6px;
   margin-top: 16px;
 }
+
+/* estilos registro para definir el largo de los campos, el color de los imputs y el select de las comunas. */
+.registro-form {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.registro-form input,
+.registro-form select {
+    background-color: #f2f2f2;
+}
