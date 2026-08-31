@@ -232,3 +232,58 @@ footer a {
 .paso.activo .punto {
   background-color: var(--verde-kiwi);
 }
+
+/* formulario de envio */
+.formulario {
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.formulario h2 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--verde-oscuro);
+  margin: 16px 0 12px 0;
+}
+
+.campo {
+  margin-bottom: 12px;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+.campo input, .campo select {
+  width: 100%;
+  max-width: 400px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: white;
+}
+
+.mensaje-error {
+  color: #b3261e;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.tabla-paquetes {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.tabla-paquetes th, .tabla-paquetes td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.tabla-paquetes th {
+  background-color: var(--verde-oscuro);
+  color: white;
+}
