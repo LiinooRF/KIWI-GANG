@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KiwiExpress - Registro</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link href="./assets/css/style.css" rel="stylesheet">
   <link href="./assets/css/estilos.css" rel="stylesheet">
 </head>
@@ -25,10 +26,61 @@
   </header>
 
   <main>
-    <section class="hero">
-      <h1>Registro</h1>
-      <p>Página en construcción</p>
-    </section>
+      <section class="hero">
+        <h1>Registro</h1>
+        <p>Crea una cuenta de forma gratuita en pocos minutos.</p>
+        <p>Gestiona tus despachos en un solo lugar.</p>
+    
+        <form class="registro-form">
+          <div class="mt-3">
+            <label for="rut" class="form-label">Rut</label>
+            <input type="text" class="form-control" id="rut" name="rut">
+          </div>
+
+          <div class="mt-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre">
+          </div>
+
+          <div class="mt-3">
+              <label for="apellidos" class="form-label">Apellidos</label>
+              <input type="text" class="form-control" id="apellidos" name="apellidos">
+          </div>
+
+          <div class="mt-3">
+              <label for="email" class="form-label">Correo electrónico</label>
+              <input type="email" class="form-control" id="email" name="email">
+          </div>
+
+          <div class="mt-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="password" name="password">
+          </div>
+
+          <div class="mt-3">
+              <label for="passwordverify" class="form-label">Repetir contraseña</label>
+              <input type="password" class="form-control" id="passwordverify" name="passwordverify">
+          </div>
+
+          <div class="mt-3">
+              <label for="telefono" class="form-label">Telefono (Opcional)</label>
+              <input type="text" class="form-control" id="telefono" name="telefono">
+          </div>
+
+          <div class="mt-3">
+              <label for="direccion" class="form-label">Direccion</label>
+              <input type="text" class="form-control" id="direccion" name="direccion">
+          </div>
+
+          <div class="mt-3">
+              <label for="comuna" class="form-label">Comuna</label>
+              <select class="form-select" id="comuna" name="comuna">
+                <option value="">Selecciona una comuna</option>
+              </select>
+          </div>
+            <button class="btn btn-primary mt-3" type="submit">Enviar</button>
+        </form>
+      </section>
   </main>
 
   <footer>
@@ -36,5 +88,7 @@
     <p>📞 +56 9 1234 5678 | ✉️ contacto@kiwiexpress.cl</p>
     <p><a href="nosotros.html">Conócenos</a> | <a href="contacto.html">Contáctanos</a></p>
   </footer>
+  <script src="assets/js/comunas.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
