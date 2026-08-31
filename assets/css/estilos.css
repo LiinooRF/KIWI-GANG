@@ -112,3 +112,197 @@ footer a {
     gap: 10px;
   }
 }
+/* ADMIN HOME ESTILO */
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--gris-fondo);
+}
+
+.admin-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background-color: var(--verde-oscuro);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+}
+
+.admin-sidebar .logo {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 0 20px 20px 20px;
+  display: block;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 12px;
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-nav a {
+  color: white;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-left: 3px solid transparent;
+}
+
+.admin-nav a:hover {
+  background-color: var(--verde-kiwi);
+}
+
+.admin-nav a.activo {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-left-color: var(--verde-kiwi);
+  font-weight: bold;
+}
+
+.admin-nav .salir {
+  margin-top: auto;
+}
+
+/* contenido principal */
+.admin-main {
+  flex: 1;
+  padding: 24px 32px;
+}
+
+.admin-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.admin-topbar h1 {
+  font-size: 1.5rem;
+  color: var(--verde-oscuro);
+}
+
+.admin-usuario {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-usuario .avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--verde-kiwi);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* tarjetas de resumen */
+.admin-resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.admin-tarjeta {
+  background-color: white;
+  border-left: 4px solid var(--verde-kiwi);
+  border-radius: 6px;
+  padding: 18px 20px;
+}
+
+.admin-tarjeta .numero {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--verde-oscuro);
+  display: block;
+}
+
+.admin-tarjeta .etiqueta {
+  color: var(--texto);
+  font-size: 0.9rem;
+}
+
+/* actividad reciente */
+.admin-panel {
+  background-color: white;
+  border-radius: 6px;
+  padding: 20px;
+}
+
+.admin-panel h2 {
+  color: var(--verde-oscuro);
+  margin-bottom: 14px;
+  font-size: 1.1rem;
+}
+
+.admin-tabla {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-tabla th,
+.admin-tabla td {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--gris-fondo);
+}
+
+.admin-tabla th {
+  color: var(--texto);
+  font-size: 0.85rem;
+}
+
+.estado {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  color: white;
+}
+
+.estado.entregado {
+  background-color: var(--verde-kiwi);
+}
+
+.estado.transito {
+  background-color: var(--cafe-kiwi);
+}
+
+.estado.pendiente {
+  background-color: #b0763f;
+}
+
+/* responsive */
+@media (max-width: 750px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+  }
+
+  .admin-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .admin-nav .salir {
+    margin-top: 0;
+  }
+
+  .admin-tabla {
+    display: block;
+    overflow-x: auto;
+  }
+}
