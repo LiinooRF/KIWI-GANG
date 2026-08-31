@@ -1,5 +1,21 @@
 // busqueda de envios por codigo
 
+const ordenEstados = ["creado", "recibido", "en transito", "en reparto", "entregado"];
+
+function lineaEstados(estadoActual) {
+  const posicion = ordenEstados.indexOf(estadoActual);
+  let html = '<div class="linea-estados">';
+  for (let i = 0; i < ordenEstados.length; i++) {
+    if (i <= posicion) {
+      html += '<div class="paso activo"><span class="punto"></span><small>' + ordenEstados[i] + '</small></div>';
+    } else {
+      html += '<div class="paso"><span class="punto"></span><small>' + ordenEstados[i] + '</small></div>';
+    }
+  }
+  html += '</div>';
+  return html;
+}
+
 function buscarEnvio() {
   const codigo = document.getElementById("codigoEnvio").value.trim().toUpperCase();
   const resultado = document.getElementById("resultado");
@@ -27,6 +43,6 @@ function buscarEnvio() {
     '<p><strong>Cliente:</strong> ' + encontrado.cliente + '</p>' +
     '<p><strong>Comuna destino:</strong> ' + encontrado.comuna + '</p>' +
     '<p><strong>Fecha solicitud:</strong> ' + encontrado.fecha + '</p>' +
-    '<p class="estado">Estado: ' + encontrado.estado + '</p>' +
+    lineaEstados(encontrado.estado) +
     '</div>';
 }
