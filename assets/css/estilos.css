@@ -14,37 +14,13 @@ body {
   color: var(--texto);
 }
 
-/* barra de navegacion */
-.navbar {
+/* barra de navegacion (bootstrap con nuestros colores) */
+.navbar-kiwi {
   background-color: var(--verde-oscuro);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 24px;
-  flex-wrap: wrap;
 }
 
-.navbar .logo {
-  font-size: 1.4rem;
+.navbar-kiwi .navbar-brand {
   font-weight: bold;
-  color: white;
-}
-
-.navbar ul {
-  display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-}
-
-.navbar a {
-  color: white;
-  padding: 6px 8px;
-}
-
-.navbar a:hover {
-  background-color: var(--verde-kiwi);
-  border-radius: 4px;
 }
 
 /* contenido principal */
@@ -100,18 +76,6 @@ footer a {
   color: var(--verde-kiwi);
 }
 
-/* celular */
-@media (max-width: 600px) {
-  .navbar {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .navbar ul {
-    justify-content: center;
-    gap: 10px;
-  }
-}
 
 /* tarjetas de servicios */
 .servicios h2, .pasos h2 {
