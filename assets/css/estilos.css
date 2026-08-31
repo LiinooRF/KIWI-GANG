@@ -199,3 +199,36 @@ footer a {
   border-radius: 6px;
   margin-top: 16px;
 }
+
+/* linea de estados del envio */
+.linea-estados {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.paso {
+  text-align: center;
+  flex: 1;
+  min-width: 70px;
+  color: #999;
+}
+
+.paso .punto {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin: 0 auto 6px auto;
+}
+
+.paso.activo {
+  color: var(--verde-oscuro);
+  font-weight: bold;
+}
+
+.paso.activo .punto {
+  background-color: var(--verde-kiwi);
+}
