@@ -345,9 +345,12 @@ a:hover {
 /* contenido principal */
 .admin-main {
   flex: 1;
-  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  max-width: none;
+  margin: 0;
+  padding: 0;
 }
-
 .admin-topbar {
   display: flex;
   justify-content: space-between;
