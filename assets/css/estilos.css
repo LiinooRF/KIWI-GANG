@@ -164,6 +164,41 @@ footer a {
   margin-top: 16px;
 }
 
+/* estilos registro para definir el largo de los campos, el color de los imputs y el select de las comunas. */
+.registro-form {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.registro-form input,
+.registro-form select {
+    background-color: #f2f2f2;
+}
+
+/* Textos para los imputs */
+.form-label {
+  display: block;
+  text-align: left;
+  margin-bottom: 4px;
+}
+.form-text {
+  text-align: left;
+}
+
+.invalid-feedback {
+  text-align: left;
+}
+
+/* Añadible para quitar el underline para los links que bootstrap implementa por defecto.
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+*/
+
 /* linea de estados del envio */
 .linea-estados {
   display: flex;
@@ -445,3 +480,4 @@ footer a {
     overflow-x: auto;
   }
 }
+
