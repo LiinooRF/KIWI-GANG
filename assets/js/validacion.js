@@ -27,6 +27,7 @@ if (!formulario.checkValidity()) {
     mensaje.classList.remove("d-none");
     }
     //mostrar los estados de validacion de los campos al usuario.
+    
     formulario.classList.add("was-validated")
 });
 
