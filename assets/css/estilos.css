@@ -345,27 +345,30 @@ a:hover {
 /* contenido principal */
 .admin-main {
   flex: 1;
-  padding: 24px 32px;
+  padding: 32px;
+  min-width: 0;
 }
 
 .admin-topbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  gap: 20px;
   flex-wrap: wrap;
-  gap: 12px;
 }
 
 .admin-topbar h1 {
   font-size: 1.5rem;
   color: var(--verde-oscuro);
+  margin: 0;
 }
 
 .admin-usuario {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-left: auto;
+  margin-right: 20px;
 }
 
 .admin-usuario .avatar {
@@ -440,9 +443,14 @@ a:hover {
 }
 
 .admin-toolbar {
-  display: flex;
-  justify-content: flex-end;
+  display: grid;
+  grid-template-columns: 15% 28% 15% 22% 20%;
   margin-bottom: 16px;
+}
+
+.admin-toolbar > * {
+  grid-column: 5;
+  justify-self: start;
 }
 
 .acciones a {
@@ -490,13 +498,15 @@ a:hover {
 }
 
 /* responsive */
-@media (max-width: 750px) {
+@media (max-width: 992px) {
+
   .admin-layout {
     flex-direction: column;
   }
 
   .admin-sidebar {
     width: 100%;
+    min-height: auto;
   }
 
   .admin-nav {
@@ -508,9 +518,55 @@ a:hover {
     margin-top: 0;
   }
 
+  .admin-main {
+    padding: 24px;
+  }
+
   .admin-tabla {
     display: block;
+    width: 100%;
     overflow-x: auto;
   }
-}
 
+  .admin-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-toolbar > * {
+    grid-column: 1;
+    justify-self: start;
+  }
+}
+/* responsive para celulares*/
+@media (max-width: 576px) {
+
+  .admin-main {
+    padding: 16px;
+  }
+
+  .admin-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-usuario {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .admin-nav {
+    flex-direction: column;
+  }
+
+  .admin-nav a {
+    width: 100%;
+  }
+
+  .admin-toolbar {
+    margin-bottom: 12px;
+  }
+
+  .admin-toolbar > * {
+    width: 100%;
+  }
+}
