@@ -15,6 +15,7 @@ body {
 }
 
 /* barra de navegacion (bootstrap con nuestros colores) */
+
 .navbar-kiwi {
   background-color: var(--verde-oscuro);
 }
@@ -24,6 +25,7 @@ body {
 }
 
 /* contenido principal */
+
 main {
   max-width: 1100px;
   margin: 0 auto;
@@ -64,6 +66,7 @@ main {
 }
 
 /* footer */
+
 footer {
   background-color: #333;
   color: #ddd;
@@ -78,7 +81,9 @@ footer a {
 
 
 /* tarjetas de servicios */
-.servicios h2, .pasos h2 {
+
+.servicios h2,
+.pasos h2 {
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--verde-oscuro);
@@ -110,6 +115,7 @@ footer a {
 }
 
 /* pasos de como funciona */
+
 .pasos {
   margin-top: 24px;
   background-color: white;
@@ -122,6 +128,7 @@ footer a {
 }
 
 /* buscador de seguimiento */
+
 .buscador {
   display: flex;
   gap: 8px;
@@ -164,23 +171,27 @@ footer a {
   margin-top: 16px;
 }
 
-/* estilos registro para definir el largo de los campos, el color de los imputs y el select de las comunas. */
+/* estilos registro para definir el largo de los campos,
+   el color de los inputs y el select de las comunas */
+
 .registro-form {
-    width: 400px;
-    margin: 0 auto;
+  width: 400px;
+  margin: 0 auto;
 }
 
 .registro-form input,
 .registro-form select {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
-/* Textos para los imputs */
+/* Textos para los inputs */
+
 .form-label {
   display: block;
   text-align: left;
   margin-bottom: 4px;
 }
+
 .form-text {
   text-align: left;
 }
@@ -190,6 +201,7 @@ footer a {
 }
 
 /* Añadible para quitar el underline para los links que bootstrap implementa por defecto.
+
 a {
   text-decoration: none;
 }
@@ -197,9 +209,11 @@ a {
 a:hover {
   text-decoration: none;
 }
+
 */
 
 /* linea de estados del envio */
+
 .linea-estados {
   display: flex;
   justify-content: space-between;
@@ -233,6 +247,7 @@ a:hover {
 }
 
 /* formulario de envio */
+
 .formulario {
   background-color: white;
   border-radius: 8px;
@@ -256,7 +271,8 @@ a:hover {
   font-weight: bold;
 }
 
-.campo input, .campo select {
+.campo input,
+.campo select {
   width: 100%;
   max-width: 400px;
   padding: 8px;
@@ -276,7 +292,8 @@ a:hover {
   margin-top: 8px;
 }
 
-.tabla-paquetes th, .tabla-paquetes td {
+.tabla-paquetes th,
+.tabla-paquetes td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
@@ -286,7 +303,11 @@ a:hover {
   background-color: var(--verde-oscuro);
   color: white;
 }
-/* ADMIN HOME ESTILO */
+
+
+/* =========================================
+   ADMIN HOME ESTILO
+   ========================================= */
 
 .admin-layout {
   display: flex;
@@ -342,12 +363,17 @@ a:hover {
   margin-top: auto;
 }
 
-/* contenido principal */
+
+/* contenido principal del admin */
+
 .admin-main {
   flex: 1;
   padding: 32px;
   min-width: 0;
 }
+
+
+/* barra superior del admin */
 
 .admin-topbar {
   display: flex;
@@ -383,7 +409,9 @@ a:hover {
   font-weight: bold;
 }
 
+
 /* tarjetas de resumen */
+
 .admin-resumen {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -410,7 +438,9 @@ a:hover {
   font-size: 0.9rem;
 }
 
+
 /* actividad reciente */
+
 .admin-panel {
   background-color: white;
   border-radius: 6px;
@@ -423,10 +453,14 @@ a:hover {
   font-size: 1.1rem;
 }
 
+
+/* tabla admin */
+
 .admin-tabla {
   width: 100%;
   border-collapse: collapse;
   border: 1px solid #ddd;
+  table-layout: fixed;
 }
 
 .admin-tabla th,
@@ -442,16 +476,50 @@ a:hover {
   background-color: var(--gris-fondo);
 }
 
+
+/* ancho de las columnas */
+
+.admin-tabla th:nth-child(1),
+.admin-tabla td:nth-child(1) {
+  width: 15%;
+}
+
+.admin-tabla th:nth-child(2),
+.admin-tabla td:nth-child(2) {
+  width: 28%;
+}
+
+.admin-tabla th:nth-child(3),
+.admin-tabla td:nth-child(3) {
+  width: 15%;
+}
+
+.admin-tabla th:nth-child(4),
+.admin-tabla td:nth-child(4) {
+  width: 22%;
+}
+
+.admin-tabla th:nth-child(5),
+.admin-tabla td:nth-child(5) {
+  width: 20%;
+}
+
+
+/* boton nuevo usuario */
+
 .admin-toolbar {
   display: grid;
   grid-template-columns: 15% 28% 15% 22% 20%;
-  margin-bottom: 16px;
+  margin: 0 20px 16px 20px;
 }
 
 .admin-toolbar > * {
   grid-column: 5;
   justify-self: start;
 }
+
+
+/* acciones */
 
 .acciones a {
   display: inline-block;
@@ -478,6 +546,9 @@ a:hover {
   background-color: #8f2e2e;
 }
 
+
+/* estados */
+
 .estado {
   padding: 3px 10px;
   border-radius: 12px;
@@ -497,7 +568,11 @@ a:hover {
   background-color: #b0763f;
 }
 
-/* responsive */
+
+/* =========================================
+   RESPONSIVE - TABLET
+   ========================================= */
+
 @media (max-width: 992px) {
 
   .admin-layout {
@@ -526,18 +601,28 @@ a:hover {
     display: block;
     width: 100%;
     overflow-x: auto;
+    min-width: 700px;
   }
 
   .admin-toolbar {
-    grid-template-columns: 1fr;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .admin-toolbar > * {
-    grid-column: 1;
-    justify-self: start;
+    width: auto;
+    grid-column: auto;
+    justify-self: auto;
   }
 }
-/* responsive para celulares*/
+
+
+/* =========================================
+   RESPONSIVE - CELULAR
+   ========================================= */
+
 @media (max-width: 576px) {
 
   .admin-main {
@@ -547,6 +632,7 @@ a:hover {
   .admin-topbar {
     flex-direction: column;
     align-items: flex-start;
+    gap: 12px;
   }
 
   .admin-usuario {
@@ -563,10 +649,26 @@ a:hover {
   }
 
   .admin-toolbar {
-    margin-bottom: 12px;
+    display: flex;
+    width: 100%;
+    margin: 0 0 12px 0;
   }
 
   .admin-toolbar > * {
     width: 100%;
+  }
+
+  .admin-toolbar .boton {
+    width: 100%;
+    text-align: center;
+  }
+
+  .admin-panel {
+    padding: 12px;
+    overflow-x: auto;
+  }
+
+  .admin-tabla {
+    min-width: 700px;
   }
 }
