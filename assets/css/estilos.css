@@ -8,6 +8,16 @@
   --texto: #2b2b2b;
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.admin-layout {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
   background-color: var(--gris-fondo);
@@ -444,7 +454,10 @@ a:hover {
 .admin-panel {
   background-color: white;
   border-radius: 6px;
-  padding: 20px;
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto; /* Esto permite deslizar horizontalmente solo este bloque */
 }
 
 .admin-panel h2 {
@@ -461,6 +474,7 @@ a:hover {
   border-collapse: collapse;
   border: 1px solid #ddd;
   table-layout: fixed;
+  min-width: 500px;
 }
 
 .admin-tabla th,
@@ -508,14 +522,9 @@ a:hover {
 /* boton nuevo usuario */
 
 .admin-toolbar {
-  display: grid;
-  grid-template-columns: 15% 28% 15% 22% 20%;
-  margin: 0 20px 16px 20px;
-}
-
-.admin-toolbar > * {
-  grid-column: 5;
-  justify-self: start;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 16px 0;
 }
 
 
@@ -598,9 +607,7 @@ a:hover {
   }
 
   .admin-tabla {
-    display: block;
     width: 100%;
-    overflow-x: auto;
     min-width: 700px;
   }
 
@@ -629,10 +636,28 @@ a:hover {
     padding: 16px;
   }
 
+  
   .admin-topbar {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
+  }
+
+  .admin-resumen {
+    grid-template-columns: 1fr 1fr; /* Fuerza 2 columnas simétricas */
+    gap: 12px;
+  }
+
+  .admin-tarjeta {
+    padding: 12px 10px;
+  }
+
+  .admin-tarjeta .numero {
+    font-size: 1.5rem; /* Reduce un poco el tamaño del número para evitar recortes */
+  }
+
+  .admin-tarjeta .etiqueta {
+    font-size: 0.8rem;
   }
 
   .admin-usuario {
@@ -661,7 +686,9 @@ a:hover {
   .admin-toolbar .boton {
     width: 100%;
     text-align: center;
+    box-sizing: border-box;
   }
+
 
   .admin-panel {
     padding: 12px;
