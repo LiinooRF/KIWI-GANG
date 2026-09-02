@@ -426,18 +426,51 @@ a:hover {
 .admin-tabla {
   width: 100%;
   border-collapse: collapse;
+  border: 1px solid #ddd;
 }
 
 .admin-tabla th,
 .admin-tabla td {
   text-align: left;
   padding: 10px 8px;
-  border-bottom: 1px solid var(--gris-fondo);
+  border: 1px solid #ddd;
 }
 
 .admin-tabla th {
   color: var(--texto);
   font-size: 0.85rem;
+  background-color: var(--gris-fondo);
+}
+
+.admin-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.acciones a {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 4px;
+  color: white;
+  font-size: 0.85rem;
+  margin-right: 6px;
+}
+
+.acciones a.btn-editar {
+  background-color: var(--verde-kiwi);
+}
+
+.acciones a.btn-editar:hover {
+  background-color: var(--verde-oscuro);
+}
+
+.acciones a.btn-eliminar {
+  background-color: #b23c3c;
+}
+
+.acciones a.btn-eliminar:hover {
+  background-color: #8f2e2e;
 }
 
 .estado {
