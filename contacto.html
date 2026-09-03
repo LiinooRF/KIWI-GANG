@@ -35,7 +35,45 @@
   <main>
     <section class="hero">
       <h1>Contacto</h1>
-      <p>Página en construcción</p>
+      <p>Envíanos tus mensajes, dudas o sugerencias.</p>
+    </section>
+
+    <section class="formulario">
+      <form>
+          <div class="mt-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required maxlength="100">
+          </div>
+
+          <div class="mt-3">
+              <label for="email" class="form-label">Correo electrónico</label>
+              <input 
+              type="email" 
+              class="form-control" 
+              id="email" 
+              name="email"
+              pattern=".+@(duoc.cl|profesor.duoc.cl|gmail.com)"
+              required
+              maxlength="100"
+              aria-describedby="correoHelp correoError"
+              >
+              
+              <div id="correoHelp" class="form-text">
+                Correos admitidos: @duoc.cl, @profesor.duoc.cl y @gmail.com.
+              </div>
+
+              <div id="correoError" class="invalid-feedback">
+                Ingresa un correo admitido.
+              </div>
+          </div>
+
+          <div class="mt-3">
+              <label for="comentario" class="form-label">Comentario</label>
+              <textarea class="form-control" id="comentario" name="Comentario" required maxlength="500"></textarea>
+          </div>  
+
+          <button class="btn btn-success mt-4" type="submit">Enviar</button>
+      </form>
     </section>
   </main>
 
