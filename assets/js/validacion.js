@@ -1,7 +1,7 @@
 //Validacion Rut
 //formulario representa el registro.
 const formulario = document.querySelector(".registro-form");
-
+if (formulario) {
 //Validacion contraseña
 const password = document.querySelector("#password");
 const passwordverify = document.querySelector("#passwordverify");
@@ -30,4 +30,47 @@ if (!formulario.checkValidity()) {
     
     formulario.classList.add("was-validated")
 });
+}
 
+const formularioLogin = document.querySelector(".login-form");
+if (formularioLogin) {
+  const mensaje = document.querySelector("#IngresoExitoso");
+
+  const email = document.querySelector("#email"); //Campos input para manejar sus validaciones.
+  const password = document.querySelector("#password");
+
+  formularioLogin.addEventListener("submit", (event) => {
+    email.setCustomValidity(""); //Se quitan validaciones custom. (Queda como "sin error personalizado.")
+    password.setCustomValidity("");
+  if (!formularioLogin.checkValidity()) {
+      event.preventDefault();
+      mensaje.classList.add("d-none");
+      formularioLogin.classList.add("was-validated");
+      return;
+      }
+      const correoIngresado = document.querySelector("#email").value; //Toma los valores del input
+      const contraseñaIngresada = document.querySelector("#password").value;
+      const usuarioEncontrado = listaUsuarios.find(usuario => //Compara datos ingresados en usuariosRegistrados.js
+          usuario.correo === correoIngresado &&
+          usuario.contraseña === contraseñaIngresada
+      );
+      event.preventDefault(); //Previene envio / Limpia mensaje post cambio de inputs
+      mensaje.classList.add("d-none");
+      if (usuarioEncontrado) { //Imprime el mensaje de exito solo si coinciden
+          event.preventDefault();
+          mensaje.classList.remove("d-none");
+
+          //Un timeout, {la direccion} , los milisegundos de tiempo.
+          setTimeout(() => {window.location.href = "envio.html";}, 1000);
+      } else {
+        //Validaciones fallidas custom para no dejar pasar si no matchea con usuarioEncontrado (Mensaje interno para ubicar el "error".) 
+        email.setCustomValidity("Correo o contraseña incorrectos"); 
+        password.setCustomValidity("Correo o contraseña incorrectos");
+
+        formularioLogin.classList.add("was-validated");
+        return;
+      }
+
+          formularioLogin.classList.add("was-validated");
+  });
+  }
