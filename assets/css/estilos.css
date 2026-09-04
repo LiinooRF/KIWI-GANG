@@ -632,13 +632,17 @@ footer a {
   }
 
   .admin-resumen {
-    grid-template-columns: 1fr 1fr; /* Fuerza 2 columnas simétricas */
+    grid-template-columns: 1fr; /* Fuerza 2 columnas simétricas */
     gap: 12px;
   }
 
   .admin-tarjeta {
     padding: 12px 10px;
   }
+
+  .admin-tarjeta {
+    min-width: 0;
+}
 
   .admin-tarjeta .numero {
     font-size: 1.5rem; /* Reduce un poco el tamaño del número para evitar recortes */

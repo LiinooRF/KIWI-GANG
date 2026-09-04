@@ -6,7 +6,6 @@
   <title>KiwiExpress - Panel de administración</title>
   <link href="./assets/css/style.css" rel="stylesheet">
   <link href="./assets/css/estilos.css" rel="stylesheet">
-  <link href="./assets/css/admin.css" rel="stylesheet">
 </head>
 <body>
   <div class="admin-layout">
@@ -50,36 +49,38 @@
 
       <section class="admin-panel">
         <h2>Actividad reciente</h2>
-        <table class="admin-tabla">
-          <thead>
-            <tr>
-              <th>N° envío</th>
-              <th>Destinatario</th>
-              <th>Comuna</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>#1042</td>
-              <td>Javiera Reyes</td>
-              <td>Ñuñoa</td>
-              <td><span class="estado entregado">Entregado</span></td>
-            </tr>
-            <tr>
-              <td>#1041</td>
-              <td>Pedro Salinas</td>
-              <td>Maipú</td>
-              <td><span class="estado transito">En tránsito</span></td>
-            </tr>
-            <tr>
-              <td>#1040</td>
-              <td>Camila Rojas</td>
-              <td>La Florida</td>
-              <td><span class="estado pendiente">Pendiente</span></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="tabla-scroll">
+          <table class="admin-tabla">
+            <thead>
+              <tr>
+                <th>N° envío</th>
+                <th>Destinatario</th>
+                <th>Comuna</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#1042</td>
+                <td>Javiera Reyes</td>
+                <td>Ñuñoa</td>
+                <td><span class="estado entregado">Entregado</span></td>
+              </tr>
+              <tr>
+                <td>#1041</td>
+                <td>Pedro Salinas</td>
+                <td>Maipú</td>
+                <td><span class="estado transito">En tránsito</span></td>
+              </tr>
+              <tr>
+                <td>#1040</td>
+                <td>Camila Rojas</td>
+                <td>La Florida</td>
+                <td><span class="estado pendiente">Pendiente</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
     </main>
   </div>
