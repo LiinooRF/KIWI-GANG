@@ -74,3 +74,20 @@ if (formularioLogin) {
           formularioLogin.classList.add("was-validated");
   });
   }
+
+  const formularioContacto = document.querySelector(".contact-form");
+  if (formularioContacto) {
+    formularioContacto.addEventListener("submit", (event) => {
+    const mensaje = document.querySelector("#EnvioExitoso");
+    if (!formularioContacto.checkValidity()) {
+    //Logica similar al check de registro.
+    event.preventDefault();
+    mensaje.classList.add("d-none");
+    }
+    else {
+    event.preventDefault();
+    mensaje.classList.remove("d-none");
+    }
+    formularioContacto.classList.add("was-validated");
+    });
+  }
