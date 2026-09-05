@@ -30,6 +30,10 @@ y usuarios desde un panel aparte.
 - nosotros.html, blogs.html y contacto.html: paginas informativas
 - admin.html, admin-usuarios.html y admin-envios.html: panel de administracion
 
+## Mockups
+
+Los mockups del sitio los hicimos en Figma antes de programar y estan en la carpeta docs/mockups.
+
 ## Como verlo
 
 El sitio esta publicado en https://kiwi.169-58-170-142.sslip.io
