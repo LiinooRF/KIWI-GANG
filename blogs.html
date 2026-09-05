@@ -8,7 +8,7 @@
   <link href="./assets/css/style.css" rel="stylesheet">
   <link href="./assets/css/estilos.css" rel="stylesheet">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-kiwi">
       <div class="container-fluid">
@@ -32,19 +32,117 @@
     </nav>
   </header>
 
-  <main>
+  <main class="flex-grow-1 w-100"> <!--Necesario para abarcar todo el espacio vertical disponible de el flexbox del body y w-100 usa el 100% del width-->
     <section class="hero">
       <h1>Blogs</h1>
-      <p>Página en construcción</p>
+      <p> Actualizaciones y novedades.</p>
+    </section>
+
+    <section>
+      <div class="accordion" id="blogAccordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+
+            <button
+                class="accordion-button collapsed"
+                type="button"
+
+                data-bs-toggle="collapse"
+                data-bs-target="#blog1"
+            >
+            
+            <img src="assets/images/Kiwi.jpg" alt="Imagen Articulo 1" width="200" height="70" class="rounded me-3">
+
+                <span class="tituloBlog">Lanzamiento de la Pagina!</span> <!--Texto visible para clickear.-->
+            </button>
+        </div>
+        
+        <div id="blog1" class="accordion-collapse collapse">
+            <div class="accordion-body">
+                <article>
+                    <header> <!--Se definen expresamente el titulo del articulo, quien lo escribió y cuando.-->
+                      <h3>Se lanza la primera versión de KiwiExpress </h3>
+                        <p class="byline">Por <span class="author"> Equipo de Administración </span></p>
+                        <p class="publish-date">Publicado: <time datetime="2026-08-28"> 28 de Agosto, 2026 </time> </p>
+                    </header>
+                    <!--Parrafo introductorio-->
+                    <p class="lead"> Nuestra Propuesta - Todo lo que necesitas para tus envíos, en un solo lugar.  </p>
+
+                    <p> El objetivo de este espacio es comunicar información respecto a la página, nuestras sucursales, los envíos y los posibles cambios que estos podrían tener. </p>
+                    <p> Este apartado será actualizado con frecuencia y será el principal medio de comunicación global con nuestros clientes.<br> ¡Esperamos que KiwiExpress sea de su agrado! </p>
+
+                  
+
+                    <p> ¿Te fue de utilidad esta información? </p>
+                    <button id="btnSi" class="btn btn-outline-secondary btn-sm me-1">Sí</button>
+                    <button id="btnNo" class="btn btn-outline-secondary btn-sm">No</button>
+                    <p id="respuesta" class="mt-3"></p>
+                </article>
+            </div>   
+        </div>
+
+        <div class="accordion-item mt-4">
+            <h2 class="accordion-header">
+
+            <button
+                class="accordion-button collapsed"
+                type="button"
+
+                data-bs-toggle="collapse"
+                data-bs-target="#blog2"
+            >
+            
+            <img src="assets/images/Paquete.jpeg" alt="Imagen Articulo 2" width="200" height="70" class="rounded me-3">
+
+                <span class="tituloBlog">¿Cómo funcionan los Servicios?</span> <!--Texto visible para clickear.-->
+            </button>
+        </div>
+
+        <div id="blog2" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                  <article>
+                      <header> <!--Se definen expresamente el titulo del articulo, quien lo escribió y cuando.-->
+                        <h3>Funcionalidades de la Página </h3>
+                          <p class="byline">Por <span class="author"> Equipo de Administración </span></p>
+                          <p class="publish-date">Publicado: <time datetime="2026-09-02"> 02 de Septiembre, 2026 </time> </p>
+                      </header>
+                      <!--Parrafo introductorio-->
+                      <p class="lead"> Explora los distintos servicios que KiwiExpress ofrece.  </p>
+
+                      <p> KiwiExpress cuenta con una variedad de acciones que se pueden realizar tanto de forma anónima como con una sesión iniciada. </p>
+                      <p> Dentro de las acciones que se pueden realizar sin necesidad de una cuenta existen: 
+                      <br> - La opción de revisar los blogs. (Aquí!) 
+                      <br> - Ingresar a la página nosotros.
+                      <br> - Realizar un seguimiento de algún envío con su respectivo código.
+                      <br> - La posibilidad de crear una cuenta de cliente. <br>
+                      Dichas acciones se encuentran disponibles en la barra de navegación en la esquina superior derecha.
+                      </p>
+
+                      <p> Para poder solicitar un envío, proporcionar detalles de destinatario y generar un código de envío se requiere una cuenta en la página, la cual puede ser creada <a href="registro.html"> aquí</a>. </p>
+                      
+                      <p> ¿Te fue de utilidad esta información? </p>
+                      <button id="btnSi2" class="btn btn-outline-secondary btn-sm me-1">Sí</button>
+                      <button id="btnNo2" class="btn btn-outline-secondary btn-sm">No</button>
+                      <p id="respuesta2" class="mt-3"></p>
+                  </article>
+              </div>   
+        </div>
+      </div>
+
+
+  
+
+
     </section>
   </main>
 
-  <footer>
+  <footer class="mt-auto">
     <p>KiwiExpress - Transporte y distribución de paquetes</p>
     <p>📞 +56 9 1234 5678 | ✉️ contacto@kiwiexpress.cl</p>
     <p><a href="nosotros.html">Conócenos</a> | <a href="contacto.html">Contáctanos</a></p>
     <p><a href="admin.html">Administración</a></p>
   </footer>
+  <script src="./assets/js/interaccion.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
