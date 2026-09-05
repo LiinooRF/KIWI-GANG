@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KiwiExpress - Envío</title>
+  <link href="./assets/css/style.css" rel="stylesheet">
+  <link href="./assets/css/estilos.css" rel="stylesheet">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a class="logo" href="admin.html">🥝 KiwiExpress Admin</a>
+      <nav class="admin-nav">
+        <a href="admin.html">🏠 Inicio</a>
+        <a href="admin-usuarios.html">👤 Usuarios</a>
+        <a href="admin-envios.html" class="activo">📦 Envíos</a>
+        <a href="index.html" class="salir">↩ Salir al sitio</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <h1 id="tituloFormEnvio">Nuevo envío</h1>
+        <div class="admin-usuario">
+          <span class="avatar">A</span>
+          <span>Admin</span>
+        </div>
+      </div>
+
+      <section class="admin-panel">
+        <form id="formDestinatario" onsubmit="return false;" class="formulario">
+          <h2>Datos del destinatario</h2>
+
+          <div class="campo">
+            <label for="nombres">Nombres</label>
+            <input type="text" id="nombres" name="nombres">
+            <div id="errorNombres" class="mensaje-error"></div>
+          </div>
+
+          <div class="campo">
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" name="apellido">
+            <div id="errorApellido" class="mensaje-error"></div>
+          </div>
+
+          <div class="campo">
+            <label for="comuna">Comuna</label>
+            <select id="comuna" name="comuna">
+              <option value="">Selecciona una comuna</option>
+            </select>
+            <div id="errorComuna" class="mensaje-error"></div>
+          </div>
+
+          <div class="campo">
+            <label for="estado">Estado</label>
+            <select id="estado" name="estado">
+              <option value="">Selecciona un estado</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="transito">En tránsito</option>
+              <option value="entregado">Entregado</option>
+            </select>
+            <div id="errorEstado" class="mensaje-error"></div>
+          </div>
+        </form>
+
+        <form id="formPaquete" onsubmit="return false;" class="formulario">
+          <h2>Agregar paquete</h2>
+
+          <div class="campo">
+            <label for="peso">Peso (kg)</label>
+            <input type="number" id="peso" name="peso" step="0.1">
+            <div id="errorPeso" class="mensaje-error"></div>
+          </div>
+
+          <div class="campo">
+            <label for="alto">Alto (cm)</label>
+            <input type="number" id="alto" name="alto">
+            <div id="errorAlto" class="mensaje-error"></div>
+          </div>
+
+          <div class="campo">
+            <label for="ancho">Ancho (cm)</label>
+            <input type="number" id="ancho" name="ancho">
+            <div id="errorAncho" class="mensaje-error"></div>
+          </div>
+
+          <div class="campo">
+            <label for="largo">Largo (cm)</label>
+            <input type="number" id="largo" name="largo">
+            <div id="errorLargo" class="mensaje-error"></div>
+          </div>
+
+          <div class="campo">
+            <label for="descripcion">Descripción</label>
+            <input type="text" id="descripcion" name="descripcion">
+            <div id="errorDescripcion" class="mensaje-error"></div>
+          </div>
+
+          <div class="campo">
+            <label for="valorDeclarado">Valor declarado</label>
+            <input type="number" id="valorDeclarado" name="valorDeclarado">
+            <div id="errorValor" class="mensaje-error"></div>
+          </div>
+
+          <div class="campo">
+            <label for="categoria">Categoría</label>
+            <select id="categoria" name="categoria">
+              <option value="">Selecciona una categoría</option>
+              <option value="fragil">Frágil</option>
+              <option value="no-fragil">No frágil</option>
+            </select>
+            <div id="errorCategoria" class="mensaje-error"></div>
+          </div>
+
+          <button type="button" class="boton" onclick="agregarPaquete()">Agregar paquete</button>
+        </form>
+
+        <div id="listaPaquetes"></div>
+        <div id="totalDeclarado"></div>
+        <div id="errorEnvio" class="mensaje-error"></div>
+
+        <div class="mt-3">
+            <button type="button" class="boton" id="btnGuardarEnvio" onclick="guardarEnvioAdmin()">Crear envío</button>
+        </div>
+
+        <div id="mensajeExito"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="assets/js/comunas.js"></script>
+  <script src="assets/js/adminEnvioForm.js"></script>
+</body>
+</html>
