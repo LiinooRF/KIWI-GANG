@@ -19,7 +19,7 @@ y usuarios desde un panel aparte.
 - CSS (hoja de estilos propia en assets/css/estilos.css)
 - JavaScript
 - Bootstrap 5
-- El deploy esta hecho en Dokploy
+- El sitio esta publicado con GitHub Pages
 
 ## Paginas del sitio
 
@@ -36,7 +36,7 @@ Los mockups del sitio los hicimos en Figma antes de programar y estan en la carp
 
 ## Como verlo
 
-El sitio esta publicado en https://kiwi.169-58-170-142.sslip.io
+El sitio esta publicado en https://liinoorf.github.io/KIWI-GANG/
 
 Si lo quieres ver en tu computador solo tienes que clonar el repositorio y abrir el
 index.html en el navegador, no necesita instalar nada.
