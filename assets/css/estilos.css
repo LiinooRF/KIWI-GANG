@@ -655,7 +655,7 @@ footer a {
 @media (max-width: 576px) {
 
   .admin-main {
-    padding: 16px;
+    padding: 6px;
   }
 
   
@@ -709,18 +709,55 @@ footer a {
     width: 100%;
   }
 
-  .admin-toolbar .boton {
-    width: 100%;
-    text-align: center;
-    box-sizing: border-box;
-  }
-
-
   .admin-panel {
-    padding: 12px;
+    padding: 4px;
   }
 
   .admin-tabla {
     min-width: 700px;
   }
+.admin-tabla thead {
+    display: none;
 }
+
+.admin-tabla, .admin-tabla tbody, .admin-tabla tr, .admin-tabla td {
+    display: block;
+    width: 100%;
+}
+
+.admin-tabla {
+    min-width: 0;
+    border: none;
+}
+
+.admin-tabla tr {
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.admin-tabla td {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding: 10px 12px;
+    border: none;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-tabla td:last-child {
+  border-bottom: none;
+}
+
+.admin-tabla td::before {
+  content: attr(data-label);
+  font-weight: bold;
+  color: var(--verde-oscuro);
+  font-size: 0.8rem;
+  margin-bottom: 3px;
+}
+  
+}
+  
