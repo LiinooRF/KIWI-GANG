@@ -32,52 +32,48 @@
         <a class="boton" href="admin-usuario-form.html">+ Nuevo usuario</a>
       </div>
 
-      <section class="admin-panel">
-        <table class="admin-tabla">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Correo</th>
-              <th>Comuna</th>
-              <th>Rol</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Javiera Reyes</td>
-              <td>javiera.reyes@mail.com</td>
-              <td>Ñuñoa</td>
-              <td>Cliente</td>
-              <td class="acciones">
-                <a class="btn-editar" href="admin-usuario-form.html?id=1">Editar</a>
-                <a class="btn-eliminar" href="#">Eliminar</a>
-              </td>
-            </tr>
-            <tr>
-              <td>Pedro Salinas</td>
-              <td>pedro.salinas@mail.com</td>
-              <td>Maipú</td>
-              <td>Cliente</td>
-              <td class="acciones">
-                <a class="btn-editar" href="admin-usuario-form.html?id=2">Editar</a>
-                <a class="btn-eliminar" href="#">Eliminar</a>
-              </td>
-            </tr>
-            <tr>
-              <td>Camila Rojas</td>
-              <td>camila.rojas@mail.com</td>
-              <td>La Florida</td>
-              <td>Administrador</td>
-              <td class="acciones">
-                <a class="btn-editar" href="admin-usuario-form.html?id=3">Editar</a>
-                <a class="btn-eliminar" href="#">Eliminar</a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-    </main>
-  </div>
-</body>
-</html>
+    <section class="admin-panel">
+      <table class="admin-tabla">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Comuna</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Nombre">Javiera Reyes</td>
+            <td data-label="Correo">javiera.reyes@mail.com</td>
+            <td data-label="Comuna">Ñuñoa</td>
+            <td data-label="Rol">Cliente</td>
+            <td class="acciones" data-label="Acciones">
+              <a class="btn-editar" href="admin-usuario-form.html?id=1">Editar</a>
+              <a class="btn-eliminar" href="#">Eliminar</a>
+            </td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Pedro Salinas</td>
+            <td data-label="Correo">pedro.salinas@mail.com</td>
+            <td data-label="Comuna">Maipú</td>
+            <td data-label="Rol">Cliente</td>
+            <td class="acciones" data-label="Acciones">
+              <a class="btn-editar" href="admin-usuario-form.html?id=2">Editar</a>
+              <a class="btn-eliminar" href="#">Eliminar</a>
+            </td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Camila Rojas</td>
+            <td data-label="Correo">camila.rojas@mail.com</td>
+            <td data-label="Comuna">La Florida</td>
+            <td data-label="Rol">Administrador</td>
+            <td class="acciones" data-label="Acciones">
+              <a class="btn-editar" href="admin-usuario-form.html?id=3">Editar</a>
+              <a class="btn-eliminar" href="#">Eliminar</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
