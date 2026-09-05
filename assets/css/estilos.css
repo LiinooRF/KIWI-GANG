@@ -57,6 +57,25 @@ main {
   margin-bottom: 12px;
 }
 
+/*Lo mismo que el hero h1 pero para usar span en botones */
+.tituloBlog {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--verde-oscuro);
+  margin-bottom: 12px;
+}
+
+.accordion-button {
+    padding: 8px 12px;
+    font-size: 1rem;
+}
+
+.accordion-button img {
+    width: 100px;
+    height: 70px;
+    object-fit: cover;
+}
+
 .hero p {
   margin-bottom: 20px;
 }
