@@ -27,21 +27,21 @@ const passwordverify = document.getElementById("passwordverify");
 const mensajeExito = document.getElementById("usuarioGuardadoExitoso");
 
 formUsuarioAdmin.addEventListener("submit", (event) => {
-  if (password.value !== passwordverify.value) {
+    if (password.value !== passwordverify.value) {
     passwordverify.setCustomValidity("Las contraseñas deben coincidir");
-  } else {
+    } else {
     passwordverify.setCustomValidity("");
-  }
+    }
 
-  if (!formUsuarioAdmin.checkValidity()) {
+    if (!formUsuarioAdmin.checkValidity()) {
     event.preventDefault();
     mensajeExito.classList.add("d-none");
-  } else {
+    } else {
     event.preventDefault();
 
     // solo en modo "nuevo" agregamos a la lista en memoria (no hay backend/persistencia real)
     if (!idUsuario) {
-      const nuevoUsuario = {
+        const nuevoUsuario = {
         rut: document.getElementById("rut").value,
         nombre: document.getElementById("nombre").value,
         apellidos: document.getElementById("apellidos").value,
@@ -51,14 +51,14 @@ formUsuarioAdmin.addEventListener("submit", (event) => {
         direccion: document.getElementById("direccion").value,
         comuna: document.getElementById("comuna").selectedOptions[0].textContent,
         rol: document.getElementById("rol").value
-      };
-      listaUsuarios.push(nuevoUsuario);
+        };
+        listaUsuarios.push(nuevoUsuario);
     }
 
     mensajeExito.classList.remove("d-none");
     formUsuarioAdmin.reset();
     formUsuarioAdmin.classList.remove("was-validated");
-  }
+    }
 
-  formUsuarioAdmin.classList.add("was-validated");
+    formUsuarioAdmin.classList.add("was-validated");
 });
