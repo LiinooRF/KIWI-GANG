@@ -75,9 +75,20 @@ main {
     height: 70px;
     object-fit: cover;
 }
+.hero h2 {
+  color: var(--verde-oscuro);
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
 
 .hero p {
   margin-bottom: 20px;
+}
+
+.minimumIframe {
+  min-height: 400px;
 }
 
 .boton {
@@ -483,7 +494,6 @@ footer a {
 /* tabla admin */
 
 .admin-tabla {
-  width: 100%;
   border-collapse: collapse;
   border: 1px solid #ddd;
   table-layout: fixed;
@@ -620,7 +630,6 @@ footer a {
   }
 
   .admin-tabla {
-    width: 100%;
     min-width: 700px;
   }
 
