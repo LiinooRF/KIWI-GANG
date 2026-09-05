@@ -445,13 +445,18 @@ footer a {
   padding: 16px;
   width: 100%;
   box-sizing: border-box;
-  overflow-x: auto; /* Esto permite deslizar horizontalmente solo este bloque */
 }
 
 .admin-panel h2 {
   color: var(--verde-oscuro);
   margin-bottom: 14px;
   font-size: 1.1rem;
+}
+
+.tabla-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 
@@ -684,7 +689,6 @@ footer a {
 
   .admin-panel {
     padding: 12px;
-    overflow-x: auto;
   }
 
   .admin-tabla {
