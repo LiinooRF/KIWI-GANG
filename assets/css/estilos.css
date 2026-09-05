@@ -9,11 +9,13 @@
 }
 
 html, body {
+  overflow-x: hidden;
   width: 100%;
 }
 
 .admin-layout {
   width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -455,6 +457,7 @@ footer a {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain; /* evita que el scroll se escape de la pagina y termine rebotando*/
 }
 
 
