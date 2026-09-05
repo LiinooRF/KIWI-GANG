@@ -9,13 +9,11 @@
 }
 
 html, body {
-  overflow-x: hidden;
   width: 100%;
 }
 
 .admin-layout {
   width: 100%;
-  overflow-x: hidden;
 }
 
 body {
