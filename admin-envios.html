@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KiwiExpress - Envíos</title>
+  <link href="./assets/css/style.css" rel="stylesheet">
+  <link href="./assets/css/estilos.css" rel="stylesheet">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a class="logo" href="admin.html">🥝 KiwiExpress Admin</a>
+      <nav class="admin-nav">
+        <a href="admin.html">🏠 Inicio</a>
+        <a href="admin-usuarios.html">👤 Usuarios</a>
+        <a href="admin-envios.html" class="activo">📦 Envíos</a>
+        <a href="index.html" class="salir">↩ Salir al sitio</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <h1>Envíos</h1>
+        <div class="admin-usuario">
+          <span class="avatar">A</span>
+          <span>Admin</span>
+        </div>
+      </div>
+
+      <div class="admin-toolbar">
+        <a class="boton" href="envio.html">+ Nuevo envío</a>
+      </div>
+
+      <section class="admin-panel">
+        <table class="admin-tabla">
+          <thead>
+            <tr>
+              <th>N° envío</th>
+              <th>Destinatario</th>
+              <th>Comuna</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="N° envío">#1042</td>
+              <td data-label="Destinatario">Javiera Reyes</td>
+              <td data-label="Comuna">Ñuñoa</td>
+              <td data-label="Estado"><span class="estado entregado">Entregado</span></td>
+              <td class="acciones" data-label="Acciones">
+                <a class="btn-editar" href="admin-envio-form.html?id=1042">Editar</a>
+                <a class="btn-eliminar" href="#" onclick="confirmarEliminar(event, this, '#1042')">Eliminar</a>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="N° envío">#1041</td>
+              <td data-label="Destinatario">Pedro Salinas</td>
+              <td data-label="Comuna">Maipú</td>
+              <td data-label="Estado"><span class="estado transito">En tránsito</span></td>
+              <td class="acciones" data-label="Acciones">
+                <a class="btn-editar" href="admin-envio-form.html?id=1041">Editar</a>
+                <a class="btn-eliminar" href="#" onclick="confirmarEliminar(event, this, '#1041')">Eliminar</a>
+              </td>
+            </tr>
+            <script src="assets/js/eliminarFila.js"></script>
+          </tbody>
+        </table>
+</section>

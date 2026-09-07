@@ -8,46 +8,34 @@
   --texto: #2b2b2b;
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.admin-layout {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
   background-color: var(--gris-fondo);
   color: var(--texto);
 }
 
-/* barra de navegacion */
-.navbar {
+/* barra de navegacion (bootstrap con nuestros colores) */
+
+.navbar-kiwi {
   background-color: var(--verde-oscuro);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 24px;
-  flex-wrap: wrap;
 }
 
-.navbar .logo {
-  font-size: 1.4rem;
+.navbar-kiwi .navbar-brand {
   font-weight: bold;
-  color: white;
-}
-
-.navbar ul {
-  display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-}
-
-.navbar a {
-  color: white;
-  padding: 6px 8px;
-}
-
-.navbar a:hover {
-  background-color: var(--verde-kiwi);
-  border-radius: 4px;
 }
 
 /* contenido principal */
+
 main {
   max-width: 1100px;
   margin: 0 auto;
@@ -69,8 +57,38 @@ main {
   margin-bottom: 12px;
 }
 
+/*Lo mismo que el hero h1 pero para usar span en botones */
+.tituloBlog {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--verde-oscuro);
+  margin-bottom: 12px;
+}
+
+.accordion-button {
+    padding: 8px 12px;
+    font-size: 1rem;
+}
+
+.accordion-button img {
+    width: 100px;
+    height: 70px;
+    object-fit: cover;
+}
+.hero h2 {
+  color: var(--verde-oscuro);
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+
 .hero p {
   margin-bottom: 20px;
+}
+
+.minimumIframe {
+  min-height: 400px;
 }
 
 .boton {
@@ -88,6 +106,7 @@ main {
 }
 
 /* footer */
+
 footer {
   background-color: #333;
   color: #ddd;
@@ -100,15 +119,645 @@ footer a {
   color: var(--verde-kiwi);
 }
 
-/* celular */
-@media (max-width: 600px) {
-  .navbar {
+
+/* tarjetas de servicios */
+
+.servicios h2,
+.pasos h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--verde-oscuro);
+  margin-bottom: 16px;
+}
+
+.tarjetas {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.tarjeta {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  flex: 1;
+  min-width: 250px;
+}
+
+.tarjeta h3 {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.tarjeta a {
+  color: var(--verde-oscuro);
+  text-decoration: underline;
+}
+
+/* pasos de como funciona */
+
+.pasos {
+  margin-top: 24px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.pasos li {
+  margin-bottom: 8px;
+}
+
+/* buscador de seguimiento */
+
+.buscador {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.buscador input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 260px;
+  background-color: white;
+}
+
+.ficha-envio {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 16px;
+}
+
+.ficha-envio h3 {
+  font-weight: bold;
+  color: var(--verde-oscuro);
+  margin-bottom: 8px;
+}
+
+.ficha-envio .estado {
+  margin-top: 8px;
+  font-weight: bold;
+  color: var(--verde-kiwi);
+}
+
+.error {
+  background-color: #fdecea;
+  color: #b3261e;
+  padding: 12px;
+  border-radius: 6px;
+  margin-top: 16px;
+}
+
+/* estilos registro para definir el largo de los campos,
+   el color de los inputs y el select de las comunas */
+
+.registro-form {
+  width: 400px;
+  margin: 0 auto;
+}
+
+.registro-form input,
+.registro-form select {
+  background-color: #f2f2f2;
+}
+
+/* Textos para los inputs */
+
+.form-label {
+  display: block;
+  text-align: left;
+  margin-bottom: 4px;
+}
+
+.form-text {
+  text-align: left;
+}
+
+.invalid-feedback {
+  text-align: left;
+}
+
+/* linea de estados del envio */
+
+.linea-estados {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.paso {
+  text-align: center;
+  flex: 1;
+  min-width: 70px;
+  color: #999;
+}
+
+.paso .punto {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin: 0 auto 6px auto;
+}
+
+.paso.activo {
+  color: var(--verde-oscuro);
+  font-weight: bold;
+}
+
+.paso.activo .punto {
+  background-color: var(--verde-kiwi);
+}
+
+/* formulario de envio */
+
+.formulario {
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.formulario h2 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--verde-oscuro);
+  margin: 16px 0 12px 0;
+}
+
+.campo {
+  margin-bottom: 12px;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+.campo input,
+.campo select {
+  width: 100%;
+  max-width: 400px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: white;
+}
+
+.mensaje-error {
+  color: #b3261e;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.tabla-paquetes {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.tabla-paquetes th,
+.tabla-paquetes td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.tabla-paquetes th {
+  background-color: var(--verde-oscuro);
+  color: white;
+}
+
+
+/* =========================================
+   ADMIN HOME ESTILO
+   ========================================= */
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--gris-fondo);
+}
+
+.admin-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background-color: var(--verde-oscuro);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+}
+
+.admin-sidebar .logo {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 0 20px 20px 20px;
+  display: block;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 12px;
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-nav a {
+  color: white;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-left: 3px solid transparent;
+}
+
+.admin-nav a:hover {
+  background-color: var(--verde-kiwi);
+}
+
+.admin-nav a.activo {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-left-color: var(--verde-kiwi);
+  font-weight: bold;
+}
+
+.admin-nav .salir {
+  margin-top: auto;
+}
+
+
+/* contenido principal del admin */
+
+.admin-main {
+  flex: 1;
+  padding: 32px;
+  min-width: 0;
+}
+
+
+/* barra superior del admin */
+
+.admin-topbar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.admin-topbar h1 {
+  font-size: 1.5rem;
+  color: var(--verde-oscuro);
+  margin: 0;
+}
+
+.admin-usuario {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.admin-usuario .avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--verde-kiwi);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+
+/* tarjetas de resumen */
+
+.admin-resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.admin-tarjeta {
+  background-color: white;
+  border-left: 4px solid var(--verde-kiwi);
+  border-radius: 6px;
+  padding: 18px 20px;
+}
+
+.admin-tarjeta .numero {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--verde-oscuro);
+  display: block;
+}
+
+.admin-tarjeta .etiqueta {
+  color: var(--texto);
+  font-size: 0.9rem;
+}
+
+
+/* actividad reciente */
+
+.admin-panel {
+  background-color: white;
+  border-radius: 6px;
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.admin-panel h2 {
+  color: var(--verde-oscuro);
+  margin-bottom: 14px;
+  font-size: 1.1rem;
+}
+
+.tabla-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain; /* evita que el scroll se escape de la pagina y termine rebotando*/
+}
+
+
+/* tabla admin */
+
+.admin-tabla {
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  table-layout: fixed;
+  min-width: 500px;
+}
+
+.admin-tabla th,
+.admin-tabla td {
+  text-align: left;
+  padding: 10px 8px;
+  border: 1px solid #ddd;
+}
+
+.admin-tabla th {
+  color: var(--texto);
+  font-size: 0.85rem;
+  background-color: var(--gris-fondo);
+}
+
+
+/* ancho de las columnas */
+
+.admin-tabla th:nth-child(1),
+.admin-tabla td:nth-child(1) {
+  width: 15%;
+}
+
+.admin-tabla th:nth-child(2),
+.admin-tabla td:nth-child(2) {
+  width: 28%;
+}
+
+.admin-tabla th:nth-child(3),
+.admin-tabla td:nth-child(3) {
+  width: 15%;
+}
+
+.admin-tabla th:nth-child(4),
+.admin-tabla td:nth-child(4) {
+  width: 22%;
+}
+
+.admin-tabla th:nth-child(5),
+.admin-tabla td:nth-child(5) {
+  width: 20%;
+}
+
+
+/* boton nuevo usuario */
+
+.admin-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 16px 0;
+}
+
+
+/* acciones */
+
+.acciones a {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 4px;
+  color: white;
+  font-size: 0.85rem;
+  margin-right: 6px;
+}
+
+.acciones a.btn-editar {
+  background-color: var(--verde-kiwi);
+}
+
+.acciones a.btn-editar:hover {
+  background-color: var(--verde-oscuro);
+}
+
+.acciones a.btn-eliminar {
+  background-color: #b23c3c;
+}
+
+.acciones a.btn-eliminar:hover {
+  background-color: #8f2e2e;
+}
+
+
+/* estados */
+
+.estado {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  color: white;
+}
+
+.estado.entregado {
+  background-color: var(--verde-kiwi);
+}
+
+.estado.transito {
+  background-color: var(--cafe-kiwi);
+}
+
+.estado.pendiente {
+  background-color: #b0763f;
+}
+
+
+/* =========================================
+   RESPONSIVE - TABLET
+   ========================================= */
+
+@media (max-width: 992px) {
+
+  .admin-layout {
     flex-direction: column;
-    gap: 10px;
   }
 
-  .navbar ul {
-    justify-content: center;
-    gap: 10px;
+  .admin-sidebar {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .admin-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .admin-nav .salir {
+    margin-top: 0;
+  }
+
+  .admin-main {
+    padding: 24px;
+  }
+
+  .admin-tabla {
+    min-width: 700px;
+  }
+
+  .admin-toolbar {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .admin-toolbar > * {
+    width: auto;
+    grid-column: auto;
+    justify-self: auto;
   }
 }
+
+
+/* =========================================
+   RESPONSIVE - CELULAR
+   ========================================= */
+
+@media (max-width: 576px) {
+
+  .admin-main {
+    padding: 6px;
+  }
+
+  
+  .admin-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .admin-resumen {
+    grid-template-columns: 1fr; /* Fuerza 2 columnas simétricas */
+    gap: 12px;
+  }
+
+  .admin-tarjeta {
+    padding: 12px 10px;
+  }
+
+  .admin-tarjeta {
+    min-width: 0;
+}
+
+  .admin-tarjeta .numero {
+    font-size: 1.5rem; /* Reduce un poco el tamaño del número para evitar recortes */
+  }
+
+  .admin-tarjeta .etiqueta {
+    font-size: 0.8rem;
+  }
+
+  .admin-usuario {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .admin-nav {
+    flex-direction: column;
+  }
+
+  .admin-nav a {
+    width: 100%;
+  }
+
+  .admin-toolbar {
+    display: flex;
+    width: 100%;
+    margin: 0 0 12px 0;
+  }
+
+  .admin-toolbar > * {
+    width: 100%;
+  }
+
+  .admin-panel {
+    padding: 4px;
+  }
+
+  .admin-tabla {
+    min-width: 700px;
+  }
+.admin-tabla thead {
+    display: none;
+}
+
+.admin-tabla, .admin-tabla tbody, .admin-tabla tr, .admin-tabla td {
+    display: block;
+    width: 100%;
+}
+
+.admin-tabla {
+    min-width: 0;
+    border: none;
+}
+
+.admin-tabla tr {
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.admin-tabla td {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding: 10px 12px;
+    border: none;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-tabla td:last-child {
+  border-bottom: none;
+}
+
+.admin-tabla td::before {
+  content: attr(data-label);
+  font-weight: bold;
+  color: var(--verde-oscuro);
+  font-size: 0.8rem;
+  margin-bottom: 3px;
+}
+  
+}
+  
