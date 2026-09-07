@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KiwiExpress - Usuarios</title>
+  <link href="./assets/css/style.css" rel="stylesheet">
+  <link href="./assets/css/estilos.css" rel="stylesheet">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a class="logo" href="admin.html">🥝 KiwiExpress Admin</a>
+      <nav class="admin-nav">
+        <a href="admin.html">🏠 Inicio</a>
+        <a href="admin-usuarios.html" class="activo">👤 Usuarios</a>
+        <a href="admin-envios.html">📦 Envíos</a>
+        <a href="index.html" class="salir">↩ Salir al sitio</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <h1>Usuarios</h1>
+        <div class="admin-usuario">
+          <span class="avatar">A</span>
+          <span>Admin</span>
+        </div>
+      </div>
+
+      <div class="admin-toolbar">
+        <a class="boton" href="admin-usuario-form.html">+ Nuevo usuario</a>
+      </div>
+
+    <section class="admin-panel">
+      <table class="admin-tabla">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Comuna</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Nombre">Javiera Reyes</td>
+            <td data-label="Correo">javiera.reyes@mail.com</td>
+            <td data-label="Comuna">Ñuñoa</td>
+            <td data-label="Rol">Cliente</td>
+            <td class="acciones" data-label="Acciones">
+              <a class="btn-editar" href="admin-usuario-form.html?id=1">Editar</a>
+              <a class="btn-eliminar" href="#" onclick="confirmarEliminar(event, this, 'Javiera Reyes')">Eliminar</a>
+            </td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Pedro Salinas</td>
+            <td data-label="Correo">pedro.salinas@mail.com</td>
+            <td data-label="Comuna">Maipú</td>
+            <td data-label="Rol">Cliente</td>
+            <td class="acciones" data-label="Acciones">
+              <a class="btn-editar" href="admin-usuario-form.html?id=2">Editar</a>
+              <a class="btn-eliminar" href="#" onclick="confirmarEliminar(event, this, 'Pedro Salinas')">Eliminar</a>
+            </td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Camila Rojas</td>
+            <td data-label="Correo">camila.rojas@mail.com</td>
+            <td data-label="Comuna">La Florida</td>
+            <td data-label="Rol">Administrador</td>
+            <td class="acciones" data-label="Acciones">
+              <a class="btn-editar" href="admin-usuario-form.html?id=3">Editar</a>
+              <a class="btn-eliminar" href="#" onclick="confirmarEliminar(event, this, 'Camila Rojas')">Eliminar</a>
+            </td>
+          </tr>
+          <script src="assets/js/eliminarFila.js"></script>
+        </tbody>
+      </table>
+    </section>
