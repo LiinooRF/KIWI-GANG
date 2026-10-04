@@ -1,27 +1,32 @@
-  function Header() {  
-return (
-  <header>
-    <nav className="navbar navbar-expand-lg navbar-dark navbar-kiwi">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="index.html">🥝 KiwiExpress</a>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavbar" aria-controls="menuNavbar" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="menuNavbar">
-          <ul className="navbar-nav ms-auto">
-            <li className="nav-item"><a className="nav-link" href="index.html">Inicio</a></li>
-            <li className="nav-item"><a className="nav-link" href="seguimiento.html">Seguimiento</a></li>
-            <li className="nav-item"><a className="nav-link" href="envio.html">Solicitar envío</a></li>
-            <li className="nav-item"><a className="nav-link" href="nosotros.html">Nosotros</a></li>
-            <li className="nav-item"><a className="nav-link" href="blogs.html">Blogs</a></li>
-            <li className="nav-item"><a className="nav-link" href="contacto.html">Contacto</a></li>
-            <li className="nav-item"><a className="nav-link" href="login.html">Iniciar sesión</a></li>
-            <li className="nav-item"><a className="nav-link" href="registro.html">Registro</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-)
+import { Navbar, Nav, Container } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+
+//el navbar ahora usa react-bootstrap asi la hamburguesa funciona sin el js de bootstrap
+function Header() {
+  return (
+    <header>
+      <Navbar expand="lg" variant="dark" className="navbar-kiwi">
+        <Container fluid>
+          <Navbar.Brand as={Link} to="/">🥝 KiwiExpress</Navbar.Brand>
+          <Navbar.Toggle aria-controls="menuNavbar" />
+          <Navbar.Collapse id="menuNavbar">
+            <Nav className="ms-auto">
+              <Nav.Link as={Link} to="/">Inicio</Nav.Link>
+              <Nav.Link as={Link} to="/productos">Productos</Nav.Link>
+              <Nav.Link as={Link} to="/categorias">Categorías</Nav.Link>
+              <Nav.Link as={Link} to="/ofertas">Ofertas</Nav.Link>
+              <Nav.Link as={Link} to="/seguimiento">Seguimiento</Nav.Link>
+              <Nav.Link as={Link} to="/nosotros">Nosotros</Nav.Link>
+              <Nav.Link as={Link} to="/blogs">Blogs</Nav.Link>
+              <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
+              <Nav.Link as={Link} to="/login">Iniciar sesión</Nav.Link>
+              <Nav.Link as={Link} to="/registro">Registro</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </header>
+  )
 }
+
 export default Header;
