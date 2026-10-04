@@ -1,0 +1,14 @@
+/* estilos propios de kiwiexpress, los colores los sacamos de la entrega 1 */
+
+:root {
+  --verde-kiwi: #6da544;
+  --verde-oscuro: #4c7a2d;
+  --gris-fondo: #f4f4f4;
+  --texto: #2b2b2b;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: var(--gris-fondo);
+  color: var(--texto);
+}
