@@ -18,11 +18,17 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "karma start karma.conf.js",
     "tailwinddev": "npx @tailwindcss/cli -i ./assets/src/style.css -o ./assets/css/style.css --watch"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.3.3",
     "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "jasmine-core": "^7.0.2",
+    "karma": "^6.4.4",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-jasmine": "^5.1.0"
   }
 }
