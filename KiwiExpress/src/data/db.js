@@ -1,11 +1,30 @@
 //funciones para trabajar con los datos, hacen de base de datos falsa
-//el guardado en localstorage se agrega en el issue de persistencia
+//todo se guarda en localstorage asi no se pierde al recargar la pagina
 
 import { productos, categorias, usuarios } from './productos.js'
 
-let listaProductos = productos
-let listaCategorias = categorias
-let listaUsuarios = usuarios
+//las claves con las que guardamos en el navegador
+const CLAVE_PRODUCTOS = "kiwiProductos"
+const CLAVE_CATEGORIAS = "kiwiCategorias"
+const CLAVE_USUARIOS = "kiwiUsuarios"
+
+//lee lo guardado, y si es la primera vez que se abre deja los datos iniciales
+function cargar(clave, datosIniciales) {
+  const guardado = localStorage.getItem(clave)
+  if (guardado === null) {
+    localStorage.setItem(clave, JSON.stringify(datosIniciales))
+    return datosIniciales
+  }
+  return JSON.parse(guardado)
+}
+
+function guardar(clave, lista) {
+  localStorage.setItem(clave, JSON.stringify(lista))
+}
+
+let listaProductos = cargar(CLAVE_PRODUCTOS, productos)
+let listaCategorias = cargar(CLAVE_CATEGORIAS, categorias)
+let listaUsuarios = cargar(CLAVE_USUARIOS, usuarios)
 
 // ---------- productos ----------
 
@@ -37,6 +56,7 @@ export function listarProductosCriticos() {
 export function agregarProducto(producto) {
   producto.id = nuevoId(listaProductos)
   listaProductos.push(producto)
+  guardar(CLAVE_PRODUCTOS, listaProductos)
   return producto
 }
 
@@ -53,11 +73,13 @@ export function editarProducto(id, datos) {
   producto.categoria = datos.categoria
   producto.enOferta = datos.enOferta
   producto.precioOferta = datos.precioOferta
+  guardar(CLAVE_PRODUCTOS, listaProductos)
   return producto
 }
 
 export function eliminarProducto(id) {
   listaProductos = listaProductos.filter(p => p.id !== Number(id))
+  guardar(CLAVE_PRODUCTOS, listaProductos)
 }
 
 // ---------- categorias ----------
@@ -69,11 +91,13 @@ export function listarCategorias() {
 export function agregarCategoria(categoria) {
   categoria.id = nuevoId(listaCategorias)
   listaCategorias.push(categoria)
+  guardar(CLAVE_CATEGORIAS, listaCategorias)
   return categoria
 }
 
 export function eliminarCategoria(id) {
   listaCategorias = listaCategorias.filter(c => c.id !== Number(id))
+  guardar(CLAVE_CATEGORIAS, listaCategorias)
 }
 
 // ---------- usuarios ----------
@@ -94,6 +118,7 @@ export function buscarUsuarioPorCorreo(correo) {
 export function agregarUsuario(usuario) {
   usuario.id = nuevoId(listaUsuarios)
   listaUsuarios.push(usuario)
+  guardar(CLAVE_USUARIOS, listaUsuarios)
   return usuario
 }
 
@@ -101,6 +126,7 @@ export function editarUsuario(id, datos) {
   for (let i = 0; i < listaUsuarios.length; i++) {
     if (listaUsuarios[i].id === Number(id)) {
       listaUsuarios[i] = { ...listaUsuarios[i], ...datos }
+      guardar(CLAVE_USUARIOS, listaUsuarios)
       return listaUsuarios[i]
     }
   }
@@ -109,6 +135,7 @@ export function editarUsuario(id, datos) {
 
 export function eliminarUsuario(id) {
   listaUsuarios = listaUsuarios.filter(u => u.id !== Number(id))
+  guardar(CLAVE_USUARIOS, listaUsuarios)
 }
 
 // ---------- utilidad ----------
@@ -122,4 +149,14 @@ function nuevoId(lista) {
     }
   }
   return mayor + 1
+}
+
+//por si queremos volver a los datos de ejemplo
+export function reiniciarDatos() {
+  localStorage.removeItem(CLAVE_PRODUCTOS)
+  localStorage.removeItem(CLAVE_CATEGORIAS)
+  localStorage.removeItem(CLAVE_USUARIOS)
+  listaProductos = cargar(CLAVE_PRODUCTOS, productos)
+  listaCategorias = cargar(CLAVE_CATEGORIAS, categorias)
+  listaUsuarios = cargar(CLAVE_USUARIOS, usuarios)
 }
