@@ -2,7 +2,41 @@ import Header from '../components/layout/Header'
 import Footer from '../components/layout/Footer'
 import { useState } from "react";
 import comunas from "../js/comunas";
+import {validarContraseñas, validarFormulario} from "../js/val_registro";
 function Registro() {
+  //Esto se ejecuta cuando el usuario intenta presionar "Registrarse", ya que esta invocado "onSubmit="
+    const handleSubmit = (event) => {
+    //Previene los checkeos por defecto para utilizar lso definidos aqui.
+    event.preventDefault();
+
+    //Apunta al mismo form como objetivo.
+    const formulario = event.currentTarget;
+
+    //los valores necesarios para la funcion de val_registor se sacan de aqui, desde el formulario.
+    const password = formulario.password.value;
+    const passwordVerify = formulario.passwordverify.value;
+
+    // esto deja definido el error como uno de los dos posibles strings de validarContraseñas.
+    const errorPassword = validarContraseñas(
+      password,
+      passwordVerify
+    );
+
+    //Se emplea el error, se aplica a la validacion mostrada.
+    formulario.passwordverify.setCustomValidity(errorPassword);
+    //Bootstrap muestra los estados.
+    formulario.classList.add("was-validated");
+    //Se le asigna a la variable esValido el resultado de la funcion de checkeo
+    const esValido = validarFormulario(formulario);
+
+    //Se toma el mensaje de registro, y se activa el interruptor de muestreo solo si esValido es true.
+    const mensaje = document.querySelector("#registroExitoso");
+     if (!esValido) {
+    mensaje.classList.add("d-none");
+    return;
+  }
+  mensaje.classList.remove("d-none");
+};
     return (
         <>
         <Header />
@@ -15,7 +49,7 @@ function Registro() {
       </section>
 
       <section className="hero">
-        <form noValidate className="registro-form">
+        <form noValidate className="registro-form" onSubmit={handleSubmit}>
           <div className="mt-3">
             <label htmlFor="rut" className="form-label">Rut</label>
             <input 

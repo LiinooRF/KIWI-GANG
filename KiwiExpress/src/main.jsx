@@ -8,6 +8,6 @@ import Registro from './pages/Registro.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Login />
+    <Login/>
   </StrictMode>,
 )

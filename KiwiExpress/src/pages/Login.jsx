@@ -1,10 +1,37 @@
 import Header from '../components/layout/Header'
 import Footer from '../components/layout/Footer'
-import listaUsuarios from "../js/usuariosRegistrados";
-
+import {validarCredenciales} from "../js/val_login";
 import { useState } from "react";
 
 function Login() {
+  const handleSubmit = (event) => {
+  event.preventDefault();
+
+  //Se asigna el resultado de los input a las variables a evaluar para la funcion.
+  const formulario = event.currentTarget;
+  const correo = formulario.email.value;
+  const contraseña = formulario.password.value;
+
+  //Se le dan a la funcion.
+  const credencialesValidas = validarCredenciales(
+    correo,
+    contraseña
+  );
+
+  //Muestra validacion de Bootstrap
+  formulario.classList.add("was-validated");
+  const mensaje = document.querySelector("#IngresoExitoso");
+  
+  //si son validas se aplica el cartel de ingreso exitoso.
+  if (credencialesValidas) {
+    mensaje.classList.remove("d-none");
+    return;
+  }
+  else {
+    mensaje.classList.add("d-none"); 
+  }
+
+};
     return (
     <>
     <Header />
@@ -15,7 +42,7 @@ function Login() {
     </section>
 
     <section className="formulario">
-      <form noValidate className="login-form">
+      <form noValidate className="login-form" onSubmit={handleSubmit}>
           <div className="hero">
             <h1 className="text-center"> 🥝 KiwiExpress </h1>
           </div>
