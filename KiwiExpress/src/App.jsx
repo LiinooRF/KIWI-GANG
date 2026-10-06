@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import Layout from './components/layout/Layout.jsx'
 
 import Home from './pages/Home.jsx'
@@ -18,7 +18,7 @@ import NoEncontrada from './pages/NoEncontrada.jsx'
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -37,7 +37,7 @@ function App() {
           <Route path="*" element={<NoEncontrada />} />
         </Routes>
       </Layout>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
