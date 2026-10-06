@@ -30,6 +30,23 @@ y usuarios desde un panel aparte.
 - nosotros.html, blogs.html y contacto.html: paginas informativas
 - admin.html, admin-usuarios.html y admin-envios.html: panel de administracion
 
+## Version React (entrega 2)
+
+Para la entrega 2 el sitio se migro a React y queda en la carpeta KiwiExpress.
+
+Para correrlo:
+
+```
+cd KiwiExpress
+npm install
+npm run dev
+```
+
+Y para generar la version de produccion se usa npm run build.
+
+Las tecnologias que agregamos son React, Vite, React Router y react-bootstrap, y las
+pruebas unitarias se hacen con Jasmine y Karma.
+
 ## Mockups
 
 Los mockups del sitio los hicimos en Figma antes de programar y estan en la carpeta docs/mockups.
