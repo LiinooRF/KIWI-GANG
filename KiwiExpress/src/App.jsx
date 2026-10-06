@@ -1,4 +1,5 @@
 import { HashRouter, Routes, Route } from 'react-router-dom'
+import { CarritoProvider } from './context/CarritoContext.jsx'
 import Layout from './components/layout/Layout.jsx'
 
 import Home from './pages/Home.jsx'
@@ -18,26 +19,28 @@ import NoEncontrada from './pages/NoEncontrada.jsx'
 
 function App() {
   return (
-    <HashRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/productos" element={<Productos />} />
-          <Route path="/productos/:id" element={<DetalleProducto />} />
-          <Route path="/categorias" element={<Categorias />} />
-          <Route path="/ofertas" element={<Ofertas />} />
-          <Route path="/seguimiento" element={<Seguimiento />} />
-          <Route path="/carrito" element={<Carrito />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/nosotros" element={<Nosotros />} />
-          <Route path="/blogs" element={<Blogs />} />
-          <Route path="/contacto" element={<Contacto />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/registro" element={<Registro />} />
-          <Route path="*" element={<NoEncontrada />} />
-        </Routes>
-      </Layout>
-    </HashRouter>
+    <CarritoProvider>
+      <HashRouter>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/productos" element={<Productos />} />
+            <Route path="/productos/:id" element={<DetalleProducto />} />
+            <Route path="/categorias" element={<Categorias />} />
+            <Route path="/ofertas" element={<Ofertas />} />
+            <Route path="/seguimiento" element={<Seguimiento />} />
+            <Route path="/carrito" element={<Carrito />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/nosotros" element={<Nosotros />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/contacto" element={<Contacto />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/registro" element={<Registro />} />
+            <Route path="*" element={<NoEncontrada />} />
+          </Routes>
+        </Layout>
+      </HashRouter>
+    </CarritoProvider>
   )
 }
 
