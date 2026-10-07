@@ -1,8 +1,68 @@
+import {useState} from "react"
 function Contacto() {
+  const [validated, setValidated] = useState(false);
+  const [envioExitoso, setEnvioExitoso] = useState(false)
+  const handleSubmit = (event) => {
+    const formulario = event.currentTarget;
+    event.preventDefault();
+
+    setValidated(true)
+      if (!formulario.checkValidity()) {
+      setEnvioExitoso(false)
+      return;
+    }
+    setEnvioExitoso(true)
+  }
   return (
     <div>
-      <h1>Contacto</h1>
-      <p>Esta vista todavia esta en desarrollo.</p>
+      <main>
+        <section className="hero">
+          <h1>Contacto</h1>
+          <p>Envíanos tus mensajes, dudas o sugerencias.</p>
+        </section>
+
+        <section className="formulario">
+          <form noValidate onSubmit={handleSubmit} className={`login-form ${validated ? "was-validated" : ""}`}>
+              <div className="mt-3">
+                <label htmlFor="nombre" className="form-label">Nombre</label>
+                <input type="text" className="form-control" id="nombre" name="nombre" required maxLength="100"/>
+              </div>
+
+              <div className="mt-3">
+                  <label htmlFor="email" className="form-label">Correo electrónico</label>
+                  <input 
+                  type="email" 
+                  className="form-control" 
+                  id="email" 
+                  name="email"
+                  pattern=".+@(duoc.cl|profesor.duoc.cl|gmail.com)"
+                  required
+                  maxLength="100"
+                  aria-describedby="correoHelp correoError"
+                  />
+                  
+                  <div id="correoHelp" className="form-text">
+                    Correos admitidos: @duoc.cl, @profesor.duoc.cl y @gmail.com.
+                  </div>
+
+                  <div id="correoError" className="invalid-feedback">
+                    Ingresa un correo admitido.
+                  </div>
+              </div>
+
+              <div className="mt-3">
+                  <label htmlFor="comentario" className="form-label">Mensaje</label>
+                  <textarea className="form-control" id="comentario" name="Comentario" required maxLength="500" rows="6"></textarea>
+              </div>  
+
+              <button className="btn btn-success mt-4" type="submit">Enviar</button>
+
+              <div id="EnvioExitoso" className={envioExitoso ? "alert alert-success mt-3" : "alert alert-danger mt-3 d-none"} role="alert">
+                Mensaje Enviado. (Test)
+              </div>
+          </form>
+        </section>
+    </main>
     </div>
   )
 }
