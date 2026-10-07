@@ -1,4 +1,18 @@
+import {useState} from "react"
 function Contacto() {
+  const [validated, setValidated] = useState(false);
+  const [envioExitoso, setEnvioExitoso] = useState(false)
+  const handleSubmit = (event) => {
+    const formulario = event.currentTarget;
+    event.preventDefault();
+
+    setValidated(true)
+      if (!formulario.checkValidity()) {
+      setEnvioExitoso(false)
+      return;
+    }
+    setEnvioExitoso(true)
+  }
   return (
     <div>
       <main>
@@ -8,7 +22,7 @@ function Contacto() {
         </section>
 
         <section className="formulario">
-          <form novalidate className="contact-form">
+          <form noValidate onSubmit={handleSubmit} className={`login-form ${validated ? "was-validated" : ""}`}>
               <div className="mt-3">
                 <label htmlFor="nombre" className="form-label">Nombre</label>
                 <input type="text" className="form-control" id="nombre" name="nombre" required maxLength="100"/>
@@ -43,7 +57,7 @@ function Contacto() {
 
               <button className="btn btn-success mt-4" type="submit">Enviar</button>
 
-              <div id="EnvioExitoso" className="alert alert-success d-none mt-3 text-center" role="alert">
+              <div id="EnvioExitoso" className={envioExitoso ? "alert alert-success mt-3" : "alert alert-danger mt-3 d-none"} role="alert">
                 Mensaje Enviado. (Test)
               </div>
           </form>

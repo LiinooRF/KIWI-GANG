@@ -1,8 +1,13 @@
 import kiwi from "../assets/images/Kiwi.jpg";
 import paquete from "../assets/images/Paquete.jpeg";
-
+import {useState} from "react";
+import { Link } from 'react-router-dom'
+import { Nav } from 'react-bootstrap';
 function Blogs() {
-  return (
+    const [respuesta, setRespuesta] = useState("");
+    const [respuesta2, setRespuesta2] = useState("");
+    const mensajeGracias = "¡Gracias por tu respuesta!"
+    return (
     <div>
     <main className="flex-grow-1 w-100"> {/*--Necesario para abarcar todo el espacio vertical disponible de el flexbox del body y w-100 usa el 100% del width-->*/}
         <section className="hero">
@@ -46,9 +51,11 @@ function Blogs() {
                     
 
                       <p> ¿Te fue de utilidad esta información? </p>
-                      <button id="btnSi" className="btn btn-outline-secondary btn-sm me-1">Sí</button>
-                      <button id="btnNo" className="btn btn-outline-secondary btn-sm">No</button>
-                      <p id="respuesta" className="mt-3"></p>
+                      {/*Los botones ahora cambian el estado de respuesta. */}
+                      <button className="btn btn-outline-secondary btn-sm me-1" onClick={() => setRespuesta(mensajeGracias)} >Sí</button>
+                      <button className="btn btn-outline-secondary btn-sm " onClick={() => setRespuesta(mensajeGracias)} >No</button>
+                        {respuesta && ( <p className="mt-3 text-muted">{respuesta} </p>)}
+
                   </article>
               </div>   
           </div>
@@ -90,12 +97,12 @@ function Blogs() {
                         Dichas acciones se encuentran disponibles en la barra de navegación en la esquina superior derecha.
                         </p>
 
-                        <p> Para poder solicitar un envío, proporcionar detalles de destinatario y generar un código de envío se requiere una cuenta en la página, la cual puede ser creada <a href="registro.html"> aquí</a>. </p>
+                        <p> Para poder solicitar un envío, proporcionar detalles de destinatario y generar un código de envío se requiere una cuenta en la página, la cual puede ser creada <u> <Nav.Link as={Link} to="/registro" className="d-inline p-0 text-primary">aqui</Nav.Link> </u> </p>
                         
                         <p> ¿Te fue de utilidad esta información? </p>
-                        <button id="btnSi2" className="btn btn-outline-secondary btn-sm me-1">Sí</button>
-                        <button id="btnNo2" className="btn btn-outline-secondary btn-sm">No</button>
-                        <p id="respuesta2" className="mt-3"></p>
+                        <button className="btn btn-outline-secondary btn-sm me-1" onClick={() => setRespuesta2(mensajeGracias)}>Sí</button>
+                        <button className="btn btn-outline-secondary btn-sm" onClick={() => setRespuesta2(mensajeGracias)}>No</button>
+                        {respuesta2 && ( <p className="mt-3 text-muted">{respuesta2} </p>)}
                     </article>
                 </div>   
           </div>
