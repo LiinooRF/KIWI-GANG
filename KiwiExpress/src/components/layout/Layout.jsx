@@ -5,11 +5,13 @@ import Footer from './Footer.jsx'
 function Layout({ children }) {
   return (
     <>
+      <div className="d-flex flex-column min-vh-100">
       <Header />
       <main className="container py-4">
         {children}
       </main>
       <Footer />
+      </div>
     </>
   )
 }
