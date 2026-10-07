@@ -1,11 +1,18 @@
 import {useState} from "react"
+//Aqui se realiza el testeo de Boton.jsx
+import Boton from "../components/layout/Boton.jsx";
+
 function Contacto() {
   const [validated, setValidated] = useState(false);
   const [envioExitoso, setEnvioExitoso] = useState(false)
   const handleSubmit = (event) => {
-    const formulario = event.currentTarget;
-    event.preventDefault();
+    
+//Para que el boton de testing no de true siempre, se le redirige al formulario, para que funcione como disparador de onSubmit (por el onClick del test) 
+    const formulario = event.currentTarget.tagName === "BUTTON" 
+    ? event.currentTarget.closest("form") 
+    : event.currentTarget;
 
+    event.preventDefault();
     setValidated(true)
       if (!formulario.checkValidity()) {
       setEnvioExitoso(false)
@@ -55,7 +62,8 @@ function Contacto() {
                   <textarea className="form-control" id="comentario" name="Comentario" required maxLength="500" rows="6"></textarea>
               </div>  
 
-              <button className="btn btn-success mt-4" type="submit">Enviar</button>
+              {/*Boton para testing*/}
+              <Boton texto="Enviar" onClick={handleSubmit} />
 
               <div id="EnvioExitoso" className={envioExitoso ? "alert alert-success mt-3" : "alert alert-danger mt-3 d-none"} role="alert">
                 Mensaje Enviado. (Test)
