@@ -140,7 +140,7 @@ function Login() {
         </tbody>
       </table>
       {/*Falta jsx de admin*/}
-      <p className="mt-3" > <Nav.Link as={Link} to="/admin" className="d-inline p-0 text-primary">Ir al panel de administración</Nav.Link></p>
+      <p className="mt-3" > <u> <Nav.Link as={Link} to="/admin" className="d-inline p-0 text-primary">Ir al panel de administración</Nav.Link> </u> </p>
     </section>
   </main>
   </>
