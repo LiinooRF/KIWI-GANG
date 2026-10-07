@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client'
 //estilos: primero bootstrap y despues los nuestros para poder sobreescribirlo
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './css/estilos.css'
-import './index.css'
+import './css/style.css'
 
 import App from './App.jsx'
 
