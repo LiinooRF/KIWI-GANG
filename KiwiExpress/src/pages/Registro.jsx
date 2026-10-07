@@ -1,12 +1,45 @@
-import Header from '../components/layout/Header'
-import Footer from '../components/layout/Footer'
-import { useState } from "react";
+import { useState, useRef } from "react";
 import comunas from "../js/comunas";
+import {validarContraseñas, validarFormulario} from "../js/val_registro";
 function Registro() {
+  const [validated, setValidated] = useState(false);
+  const [password, setPassword] = useState("");
+  const [passwordVerify, setPasswordVerify] = useState("");
+  const [registroExitoso, setRegistroExitoso] = useState(false);
+
+  //una variable referencial que mas tarde se le da a la verificacion de la password.
+  const passwordVerifyRef = useRef(null);
+
+  const handleSubmit = (event) => {
+    //Detiene los checkeos por defecto
+    event.preventDefault();
+    //define al formulario actual como "formulario"
+    const formulario = event.currentTarget;
+
+    //Inicia el intento de validacion
+    setValidated(true);
+
+    //da el string correspondiente en respuesta, a la variable error
+    const error = validarContraseñas(
+      password,
+      passwordVerify
+    );
+
+    //al ref actual de la contra repetida, le activa el customvalidity de error si aplica.
+    passwordVerifyRef.current.setCustomValidity(error);
+
+    //le da el estado de validez a esValido y se decide si el registro fue exitoso
+    const esValido = validarFormulario(formulario)
+
+    if (!esValido) {
+      setRegistroExitoso(false);
+      return;
+    }
+
+    setRegistroExitoso(true);
+  };
     return (
         <>
-        <Header />
-
           <main>
       <section className="hero">
         <h1>Registro</h1>
@@ -15,7 +48,7 @@ function Registro() {
       </section>
 
       <section className="hero">
-        <form noValidate className="registro-form">
+        <form noValidate onSubmit={handleSubmit} className={`registro-form ${validated ? "was-validated" : ""}`}>
           <div className="mt-3">
             <label htmlFor="rut" className="form-label">Rut</label>
             <input 
@@ -81,6 +114,9 @@ function Registro() {
               minLength="4"
               maxLength="10"
               required
+              value={password}
+              //al cambiar el contenido del imput, cambia el valor que se tenga por el value ingresado en password
+              onChange={(e) => setPassword(e.target.value)}
               aria-describedby="contraHelp contraError"
               ></input>
 
@@ -101,7 +137,11 @@ function Registro() {
               id="passwordverify" 
               name="passwordverify" 
               required
+              value={passwordVerify}
+              onChange={(e) => setPasswordVerify(e.target.value)}
               aria-describedby="contravError"
+              //Permite acceder al input mediante el ref, uqe luego evalua si hay un error o no basado en la funcion.
+              ref={passwordVerifyRef}
               ></input>
 
               <div id="contravError" className="invalid-feedback" align="left">
@@ -136,14 +176,12 @@ function Registro() {
           </div>
             <button className="btn btn-success mt-4" type="submit">Registrarse</button>
 
-          <div id="registroExitoso" className="alert alert-success d-none mt-3" role="alert">
+          <div id="registroExitoso"   className={registroExitoso ? "alert alert-success mt-3": "alert alert-success mt-3 d-none"} role="alert">
             Usuario registrado correctamente (Test).
           </div>
         </form>
       </section>
     </main>
-
-        <Footer />
         </>
     )
 }

@@ -1,13 +1,54 @@
-import Header from '../components/layout/Header'
-import Footer from '../components/layout/Footer'
-import listaUsuarios from "../js/usuariosRegistrados";
-
-import { useState } from "react";
+import { Link } from 'react-router-dom'
+import { Nav } from 'react-bootstrap';
+import { validarCredenciales } from "../js/val_login.js"
+import { useState, useRef } from "react";
 
 function Login() {
+  //Estado inicial, vacio.
+  const [correo, setCorreo] = useState("");
+  const [contrasena, setContrasena] = useState("");
+  const [validated, setValidated] = useState(false);
+  const [loginExitoso, setLoginExitoso] = useState(false);
+
+  //variables referenciales para el manejo de errores
+  const correoRef = useRef(null);
+  const passwordRef = useRef(null);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const formulario = event.currentTarget;
+    //Indica un intento de envio
+    setValidated(true);
+
+  //Reinicia la validacion 
+  correoRef.current.setCustomValidity("");
+  passwordRef.current.setCustomValidity("");
+
+  //lo deja en false, haciendo desaparecer el cartel al cambiar el campo a erroneo.
+    if (!formulario.checkValidity()) {
+      setLoginExitoso(false)
+      return;
+    }
+
+    //la variable que define si las credenciales coinciden.
+    const esValido = validarCredenciales(correo, contrasena);
+
+    if (!esValido) {
+      setLoginExitoso(false)
+      correoRef.current.setCustomValidity("Credenciales incorrectas");
+      passwordRef.current.setCustomValidity("Credenciales incorrectas");
+      return;
+    }
+    
+    correoRef.current.setCustomValidity("");
+    passwordRef.current.setCustomValidity("");
+
+    setLoginExitoso(true);
+  };
+
     return (
     <>
-    <Header />
           <main>
     <section className="hero">
       <h1>Iniciar sesión</h1>
@@ -15,7 +56,7 @@ function Login() {
     </section>
 
     <section className="formulario">
-      <form noValidate className="login-form">
+      <form noValidate onSubmit={handleSubmit} className={`login-form ${validated ? "was-validated" : ""}`}>
           <div className="hero">
             <h1 className="text-center"> 🥝 KiwiExpress </h1>
           </div>
@@ -30,11 +71,14 @@ function Login() {
               name="email"
               pattern=".+@(duoc.cl|profesor.duoc.cl|gmail.com)"
               required
+              value={correo}
+              onChange={(e) => setCorreo(e.target.value)}
               aria-describedby="correoError"
+              ref={correoRef}
               ></input>
 
               <div id="correoError" className="invalid-feedback">
-              El correo es incorrecto.
+              Correo o contraseña incorrectos.
               </div>
           </div>
 
@@ -48,18 +92,21 @@ function Login() {
               minLength="4"
               maxLength="10"
               required
+              ref={passwordRef}
+              value={contrasena}
+              onChange={(e) => setContrasena(e.target.value)}
               aria-describedby="contraError"
               ></input>
 
               <div id="contraError" className="invalid-feedback">
-                La contraseña es incorrecta.
+                Correo o contraseña incorrectos.
               </div>
           </div>
           <div>
-            <span> ¿No tienes una cuenta? Registrate <a className="nav-link d-inline p-0 text-primary" href="registro.html"> <u> aqui</u></a>! </span>
+            <span> ¿No tienes una cuenta? Registrate{' '} <u> <Nav.Link as={Link} to="/registro" className="d-inline p-0 text-primary">aqui</Nav.Link> </u> ! </span>
           </div>
           <button className="btn btn-success mt-4" type="submit">Ingresar</button>
-          <div id="IngresoExitoso" className="alert alert-success d-none mt-3 text-center" role="alert">
+          <div id="IngresoExitoso" className={loginExitoso ? "alert alert-success mt-3" : "alert alert-danger mt-3 d-none"} role="alert">
             Ingreso Correcto. (Test)
           </div>
       </form>
@@ -92,12 +139,12 @@ function Login() {
           </tr>
         </tbody>
       </table>
-      <p className="mt-3"><a href="admin.html">Ir al panel de administración</a></p>
+      {/*Falta jsx de admin*/}
+      <p className="mt-3" > <Nav.Link as={Link} to="/admin" className="d-inline p-0 text-primary">Ir al panel de administración</Nav.Link></p>
     </section>
   </main>
-  <Footer />
   </>
-     )
+  )
 }
 
 export default Login;
