@@ -40,7 +40,7 @@ function Login() {
       passwordRef.current.setCustomValidity("Credenciales incorrectas");
       return;
     }
-    
+
     correoRef.current.setCustomValidity("");
     passwordRef.current.setCustomValidity("");
 
