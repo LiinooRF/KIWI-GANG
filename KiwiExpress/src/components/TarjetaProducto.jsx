@@ -3,16 +3,15 @@ export default function TarjetaProducto({
   precio, 
   stock, 
   imagen, 
-  descuento = 0, //Por defecto
+  enOferta = false, //Por defecto
+  precioOferta = 0,
   onAgregarCarrito 
 }) {
 
-    //Se revisa el descuento y se aplica si hay.
-    const tieneDescuento = descuento > 0;
-    const precioFinal = tieneDescuento 
-    //Se redondea y se hace el calculo del descuento de no ser 0.
-      ? Math.round(precio - (precio * (descuento / 100))) 
-      : precio;
+    //Se toman los valores del dataset.
+    const tieneDescuento = enOferta;
+    const precioFinal = precioOferta;
+
 
     return (
         //frame del componente, es un container para que compartan estilo y no hayan variaciones.
@@ -20,7 +19,7 @@ export default function TarjetaProducto({
             {/*if true, then */}
             { tieneDescuento && (
                 <span className="badge bg-danger position-absolute bottom-0 end-0 m-10 fs-9 ps-2">
-                    -{descuento}% Descuento
+                    En Oferta!
                 </span>
             )}
         
@@ -29,10 +28,10 @@ export default function TarjetaProducto({
         
         {/*ImagenProp */}
         <img 
-        scr={imagen || "https://URL.com"}
+        src={imagen || "https://placeholder.com"}
         className="card-img-top"
         alt={nombre}
-        style={{ height: "200px", objectFit: "cover"}}
+        style={{ height: "200px", objectFit: "contain"}}
         />
 
         <div className="mb-4 mt-auto d-flex flex-column gap-1">
@@ -45,7 +44,7 @@ export default function TarjetaProducto({
                   </span>
                   <div className="d-flex align-items-center">
                     <span className="fs-2 fw-bold text-danger">
-                      ${precioFinal}
+                      Precio: ${precioFinal}
                     </span>
                   </div>
                 </>
