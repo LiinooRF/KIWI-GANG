@@ -138,6 +138,55 @@ export function eliminarUsuario(id) {
   guardar(CLAVE_USUARIOS, listaUsuarios)
 }
 
+// ---------- carrito ----------
+
+const CLAVE_CARRITO = "kiwiCarrito"
+let listaCarrito = cargar(CLAVE_CARRITO, [])
+
+export function listarCarrito() {
+  return listaCarrito
+}
+
+export function agregarAlCarrito(producto, cantidad) {
+  const existente = listaCarrito.find(item => item.id === producto.id)
+
+  if (existente) {
+    existente.cantidad = existente.cantidad + cantidad
+  } else {
+    listaCarrito.push({
+      id: producto.id,
+      nombre: producto.nombre,
+      precio: producto.enOferta ? producto.precioOferta : producto.precio,
+      imagen: producto.imagen,
+      cantidad: cantidad
+    })
+  }
+
+  guardar(CLAVE_CARRITO, listaCarrito)
+  return listaCarrito
+}
+
+export function actualizarCantidadCarrito(id, cantidad) {
+  const item = listaCarrito.find(item => item.id === Number(id))
+  if (item) {
+    item.cantidad = cantidad
+    guardar(CLAVE_CARRITO, listaCarrito)
+  }
+  return listaCarrito
+}
+
+export function quitarDelCarrito(id) {
+  listaCarrito = listaCarrito.filter(item => item.id !== Number(id))
+  guardar(CLAVE_CARRITO, listaCarrito)
+  return listaCarrito
+}
+
+export function vaciarCarrito() {
+  listaCarrito = []
+  guardar(CLAVE_CARRITO, listaCarrito)
+  return listaCarrito
+}
+
 // ---------- utilidad ----------
 
 //para no repetir ids, buscamos el mayor y le sumamos uno
