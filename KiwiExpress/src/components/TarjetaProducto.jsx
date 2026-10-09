@@ -23,7 +23,7 @@ export default function TarjetaProducto({
 
     return (
         //frame del componente, es un container para que compartan estilo y no hayan variaciones.
-        <div className="card h-100 position-relative border-0 p-3 container my-5" style={{ maxWidth: "20rem" }}>
+        <div className="card h-100 position-relative border-0 p-3 container my-5" style={{ maxWidth: "20rem"}}>
             {/*if true, then */}
             { tieneDescuento && (
                 <span className="badge bg-danger position-absolute bottom-0 end-0 m-10 fs-9 ps-2">
@@ -36,7 +36,9 @@ export default function TarjetaProducto({
         
         {/*ImagenProp */}
         <img 
-        src={imagen || "https://placeholder.com"}
+        //NOTA: Ya que los img vienen desde public, y la base del proyecto en desarrollo ahora mismo es la version sin react, se utiliza este conversor para que el link sea efectivo en ambos casos.
+        //Toma la base, el root. el conversor quita la /, lo que resulta en base/ + img/imagen.jpg
+        src={`${import.meta.env.BASE_URL}${imagen.replace(/^\//, '')}`} 
         className="card-img-top"
         alt={nombre}
         style={{ height: "200px", objectFit: "contain"}}

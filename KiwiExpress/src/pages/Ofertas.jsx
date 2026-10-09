@@ -6,7 +6,7 @@ function Ofertas() {
 
   //Se agrega el Carrito
   const { agregarAlCarrito } = useCarrito();
-  //Solo productos en oferta.
+  //Solo productos en oferta. (Existe funcion en db.js)
   const soloOfertas = productos.filter((producto) => producto.enOferta === true);
 
   return (
