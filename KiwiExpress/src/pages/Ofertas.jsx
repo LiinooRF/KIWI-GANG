@@ -1,13 +1,11 @@
 import TarjetaProducto from "../components/TarjetaProducto";
-import { listarProductos } from '../data/db.js';
+import { listarOfertas } from '../data/db.js';
 import { useCarrito } from "../context/CarritoContext";
 function Ofertas() {
-  const productos = listarProductos();
-
   //Se agrega el Carrito
   const { agregarAlCarrito } = useCarrito();
-  //Solo productos en oferta. (Existe funcion en db.js)
-  const soloOfertas = productos.filter((producto) => producto.enOferta === true);
+  //Solo productos en oferta. (Funcion en db.js)
+  const soloOfertas = listarOfertas()
 
   return (
   <main>
