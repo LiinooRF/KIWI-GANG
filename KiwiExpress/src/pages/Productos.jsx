@@ -1,10 +1,61 @@
+
+import {useState} from "react";
+import TarjetaProducto from "../components/TarjetaProducto";
+import { listarProductos } from '../data/db.js';
+import { useCarrito } from "../context/CarritoContext";
 function Productos() {
+  const productos = listarProductos();
+
+  //Se agrega el Carrito
+   const { agregarAlCarrito } = useCarrito();
+  //Para la barra de busqueda, es la var que se va a actualizar.
+  const [busqueda, setBusqueda] = useState("");
+
+  //Filtra productos sin importar caps ni tildes, aqui se define que e slo que entra en el map para el muestreo de tarjetas.
+  const productosFiltrados = productos.filter((producto) => {
+  const limpiar = (texto) => texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  return limpiar(producto.nombre).includes(limpiar(busqueda));
+  })
+
   return (
-    <div>
-      <h1>Productos</h1>
-      <p>Esta vista todavia esta en desarrollo.</p>
-    </div>
-  )
+    <main>
+      <section className="hero">
+        <h1>Productos</h1>
+        <p>Solicita envios, servicios, o herramientas.</p>
+
+        {/*Buscador*/}
+        <div className="mx-auto" style={{ maxWidth: "400px" }}>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Buscar producto..."
+            value={busqueda} //cambia el estado segun lo escrito
+            onChange={(e) => setBusqueda(e.target.value)} // cada que cambie, se actualiza el estado.
+          />
+        </div>
+
+      </section>
+      <div className="d-flex flex-wrap gap-4 justify-content-center my-4">
+        {productosFiltrados.length > 0 ? (
+          productosFiltrados.map((producto) => (
+          <TarjetaProducto 
+            key={producto.id} 
+            nombre={producto.nombre} 
+            precio={producto.precio} 
+            stock={producto.stock} 
+            imagen={producto.imagen}
+            enOferta={producto.enOferta}         
+            precioOferta={producto.precioOferta}
+            descripcion={producto.descripcion}
+            onAgregarCarrito={() => agregarAlCarrito(producto, 1)} 
+          />
+          ))
+        ) : (
+          <p className="text-muted mt-4">No se encontraron productos que coincidan.</p>
+        )}
+      </div>
+    </main>
+  );
 }
 
 export default Productos;

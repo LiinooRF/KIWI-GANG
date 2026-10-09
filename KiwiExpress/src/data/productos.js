@@ -1,5 +1,10 @@
 //servicios de envio que ofrece kiwiexpress, hacen de productos de la tienda
 //por ahora estan aca, mas adelante van a salir de una base de datos
+import fotoEnvios from "../assets/images/envio-estandar.png"
+import fotoKit from "../assets/images/kit-fragil.jpg"
+import fotoCaja from "../assets/images/caja-mediana.jpg"
+import fotoDomicilio from "../assets/images/domicilio.png"
+import fotoSeguro from "../assets/images/seguro.png"
 
 export const productos = [
   {
@@ -11,7 +16,7 @@ export const productos = [
     stock: 50,
     stockCritico: 10,
     categoria: "No Frágil",
-    imagen: "/img/envio-estandar.png",
+    imagen: fotoEnvios,
     enOferta: false,
     precioOferta: 0
   },
@@ -24,7 +29,7 @@ export const productos = [
     stock: 30,
     stockCritico: 10,
     categoria: "No Frágil",
-    imagen: "/img/envio-express.png",
+    imagen: fotoEnvios,
     enOferta: true,
     precioOferta: 5490
   },
@@ -37,7 +42,7 @@ export const productos = [
     stock: 20,
     stockCritico: 5,
     categoria: "Frágil",
-    imagen: "/img/envio-fragil.png",
+    imagen: fotoEnvios,
     enOferta: false,
     precioOferta: 0
   },
@@ -50,7 +55,7 @@ export const productos = [
     stock: 120,
     stockCritico: 25,
     categoria: "No Frágil",
-    imagen: "/img/caja-mediana.png",
+    imagen: fotoCaja,
     enOferta: false,
     precioOferta: 0
   },
@@ -63,7 +68,7 @@ export const productos = [
     stock: 8,
     stockCritico: 15,
     categoria: "Frágil",
-    imagen: "/img/kit-fragil.png",
+    imagen: fotoKit,
     enOferta: true,
     precioOferta: 3490
   },
@@ -76,7 +81,7 @@ export const productos = [
     stock: 100,
     stockCritico: 20,
     categoria: "No Frágil",
-    imagen: "/img/seguro.png",
+    imagen: fotoSeguro,
     enOferta: false,
     precioOferta: 0
   },
@@ -89,7 +94,7 @@ export const productos = [
     stock: 40,
     stockCritico: 10,
     categoria: "No Frágil",
-    imagen: "/img/retiro.png",
+    imagen: fotoDomicilio,
     enOferta: false,
     precioOferta: 0
   },
@@ -102,7 +107,7 @@ export const productos = [
     stock: 4,
     stockCritico: 8,
     categoria: "Frágil",
-    imagen: "/img/fragil-express.png",
+    imagen: fotoEnvios,
     enOferta: true,
     precioOferta: 9990
   }

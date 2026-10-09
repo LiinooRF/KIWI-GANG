@@ -1,0 +1,58 @@
+name: Publicar en GitHub Pages
+
+# se ejecuta cada vez que subimos algo a staging
+on:
+  push:
+    branches: [staging]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Bajar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: KiwiExpress/package-lock.json
+
+      - name: Instalar dependencias
+        run: npm ci
+        working-directory: KiwiExpress
+
+      - name: Construir el proyecto
+        run: npm run build
+        working-directory: KiwiExpress
+
+      - name: Dejar el sitio de la entrega 1 en la carpeta entrega1
+        run: |
+          mkdir -p KiwiExpress/dist/entrega1
+          cp -r *.html assets admin KiwiExpress/dist/entrega1/
+
+      - name: Preparar la publicacion
+        uses: actions/configure-pages@v5
+
+      - name: Subir los archivos
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: KiwiExpress/dist
+
+  publicar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar en github pages
+        id: deployment
+        uses: actions/deploy-pages@v4
