@@ -2,6 +2,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom'
 import { CarritoProvider } from './context/CarritoContext.jsx'
 import Layout from './components/layout/Layout.jsx'
 
+
 import Home from './pages/Home.jsx'
 import Productos from './pages/Productos.jsx'
 import DetalleProducto from './pages/DetalleProducto.jsx'
@@ -16,6 +17,8 @@ import Contacto from './pages/Contacto.jsx'
 import Login from './pages/Login.jsx'
 import Registro from './pages/Registro.jsx'
 import NoEncontrada from './pages/NoEncontrada.jsx'
+import PagoCorrecto from './pages/PagoCorrecto.jsx'
+import PagoError from './pages/PagoError.jsx'
 
 function App() {
   return (
@@ -37,6 +40,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/registro" element={<Registro />} />
             <Route path="*" element={<NoEncontrada />} />
+            <Route path="/pago-correcto/:numero" element={<PagoCorrecto />} />
+            <Route path="/pago-error" element={<PagoError />} />
           </Routes>
         </Layout>
       </HashRouter>
