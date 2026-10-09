@@ -1,5 +1,5 @@
 import { render, fireEvent, cleanup } from '@testing-library/react';
-import Boton from '../src/components/layout/Boton'; 
+import Boton from '../src/components/layout/Boton.jsx'; 
 //Karma [describe, it, expect] guia.
 describe("Pruebas componente Boton", () => {
 //despues de cada prueba, se hace una limpieza
