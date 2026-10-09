@@ -1,7 +1,11 @@
 import TarjetaProducto from "../components/TarjetaProducto";
 import { listarProductos } from '../data/db.js';
+import { useCarrito } from "../context/CarritoContext";
 function Ofertas() {
   const productos = listarProductos();
+
+  //Se agrega el Carrito
+  const { agregarAlCarrito } = useCarrito();
   //Solo productos en oferta.
   const soloOfertas = productos.filter((producto) => producto.enOferta === true);
 
@@ -23,7 +27,8 @@ function Ofertas() {
               imagen={producto.imagen}
               enOferta={producto.enOferta}         
               precioOferta={producto.precioOferta}
-              onAgregarCarrito={() => console.log(`Agregado: ${producto.nombre}`)}
+              descripcion={producto.descripcion}
+              onAgregarCarrito={() => agregarAlCarrito(producto, 1)} 
             />
           ))
         ) : (
