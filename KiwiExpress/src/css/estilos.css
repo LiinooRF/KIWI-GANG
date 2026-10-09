@@ -289,6 +289,13 @@ footer a {
   margin: 16px 0 12px 0;
 }
 
+.formulario h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--verde-oscuro);
+  margin-bottom: 12px;
+}
+
 .campo {
   margin-bottom: 12px;
 }

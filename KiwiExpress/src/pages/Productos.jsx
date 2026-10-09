@@ -2,13 +2,16 @@
 import {useState} from "react";
 import TarjetaProducto from "../components/TarjetaProducto";
 import { listarProductos } from '../data/db.js';
+import { useCarrito } from "../context/CarritoContext";
 function Productos() {
   const productos = listarProductos();
 
+  //Se agrega el Carrito
+   const { agregarAlCarrito } = useCarrito();
   //Para la barra de busqueda, es la var que se va a actualizar.
   const [busqueda, setBusqueda] = useState("");
 
-  //Filtra productos sin importar caps ni tildes.
+  //Filtra productos sin importar caps ni tildes, aqui se define que e slo que entra en el map para el muestreo de tarjetas.
   const productosFiltrados = productos.filter((producto) => {
   const limpiar = (texto) => texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   return limpiar(producto.nombre).includes(limpiar(busqueda));
@@ -18,7 +21,7 @@ function Productos() {
     <main>
       <section className="hero">
         <h1>Productos</h1>
-        <p>Solicita envios especiales, o herramientas para los mismos.</p>
+        <p>Solicita envios, servicios, o herramientas.</p>
 
         {/*Buscador*/}
         <div className="mx-auto" style={{ maxWidth: "400px" }}>
@@ -35,7 +38,6 @@ function Productos() {
       <div className="d-flex flex-wrap gap-4 justify-content-center my-4">
         {productosFiltrados.length > 0 ? (
           productosFiltrados.map((producto) => (
-      
           <TarjetaProducto 
             key={producto.id} 
             nombre={producto.nombre} 
@@ -44,7 +46,8 @@ function Productos() {
             imagen={producto.imagen}
             enOferta={producto.enOferta}         
             precioOferta={producto.precioOferta}
-            onAgregarCarrito={() => console.log(`Agregado: ${producto.nombre}`)}
+            descripcion={producto.descripcion}
+            onAgregarCarrito={() => agregarAlCarrito(producto, 1)} 
           />
           ))
         ) : (

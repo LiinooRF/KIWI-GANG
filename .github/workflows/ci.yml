@@ -1,0 +1,36 @@
+name: Revisar los pull request
+
+# corre en cada pull request hacia staging y tambien al subir a staging
+on:
+  pull_request:
+    branches: [staging]
+  push:
+    branches: [staging]
+
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Bajar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: KiwiExpress/package-lock.json
+
+      - name: Instalar dependencias
+        run: npm ci
+        working-directory: KiwiExpress
+
+      - name: Revisar que el proyecto compile
+        run: npm run build
+        working-directory: KiwiExpress
+
+      - name: Correr las pruebas unitarias
+        run: npm test
+        working-directory: KiwiExpress
+        # mientras terminamos de configurar karma dentro del proyecto react
+        continue-on-error: true

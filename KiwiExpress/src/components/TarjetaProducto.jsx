@@ -1,16 +1,24 @@
+//Se utiliza para trackear el stock que queda.
+import { useCarrito } from "../context/CarritoContext";
 export default function TarjetaProducto({ 
   nombre, 
   precio, 
   stock, 
-  imagen, 
+  imagen,
+  descripcion,   
   enOferta = false, //Por defecto
   precioOferta = 0,
   onAgregarCarrito 
 }) {
 
-    //Se toman los valores del dataset.
-    const tieneDescuento = enOferta;
-    const precioFinal = precioOferta;
+      const { carrito } = useCarrito();
+      //se utiliza carrito para encontrar la cantidad de items en el carrito para restarlos al stock y definir su dispoinibilidad.
+      const cantidadEnCarrito = carrito.find((item) => item.nombre === nombre)?.cantidad || 0;
+      const stockRestante = stock - cantidadEnCarrito;
+
+      //Se toman los valores del dataset.
+      const tieneDescuento = enOferta;
+      const precioFinal = precioOferta;
 
 
     return (
@@ -23,7 +31,7 @@ export default function TarjetaProducto({
                 </span>
             )}
         
-        {/*NombreProp */}
+        {/*NombreProp, h5 para "titulo" */} 
          <h5 className="card-title fw-bold text-dark mb-1">{nombre}</h5>
         
         {/*ImagenProp */}
@@ -44,28 +52,36 @@ export default function TarjetaProducto({
                   </span>
                   <div className="d-flex align-items-center">
                     <span className="fs-2 fw-bold text-danger">
-                      Precio: ${precioFinal}
+                      ${precioFinal}
                     </span>
                   </div>
                 </>
               ) : (
                 <>
-                  <span className="text-muted small">Precio:</span>
-                  <span className="fs-2 fw-bold text-success">
-                    ${precio}
+                  <span className="text-muted small">
+                    Precio:
                   </span>
+                  <div className="d-flex align-items-center">
+                    <span className="fs-2 fw-bold text-success">
+                      ${precio}
+                    </span>
+                  </div>
                 </>
               )}
             </div>
+
+            {/*DescProp */}
+            <p className="card-title fw-bold text-dark mb-1" style={{ height: "5rem"}}>{descripcion}</p>
 
         <button 
             type="button" 
             className="btn btn-success mt-4"
             onClick={onAgregarCarrito}
-            disabled={stock === 0} // Si no se ofrece, bloquea boton
+            //Filtra por el stock que queda del que se lleva al carrito.
+            disabled={stockRestante === 0} // Si no se ofrece, bloquea boton
           >
             {/*Cambia el texto para el boton desactivado.*/}
-            {stock === 0 ? "No disponible" : "Añadir al carrito"}
+            {stockRestante === 0 ? "No disponible" : "Añadir al carrito"}
           </button>
         </div>
     )
