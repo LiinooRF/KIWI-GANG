@@ -83,7 +83,7 @@ function pagoAprobado() {
     vaciarCarrito()
     navigate('/pago-correcto/' + orden.numero)
   }
-  
+
   // Los hooks (useState, useCarrito...) siempre van ANTES de cualquier return.
   // Por eso este return anticipado está después de todos ellos.
   if (carrito.length === 0) {
@@ -209,7 +209,8 @@ function pagoAprobado() {
                 rows="3" maxLength="300" value={datos.indicaciones} onChange={handleChange}></textarea>
             </div>
           </div>
-
+          
+          {errorStock && <p className="error">{errorStock}</p>}
           <button className="btn btn-success mt-4" type="submit">Continuar al pago</button>
           <Link to="/carrito" className="btn btn-outline-secondary mt-4 ms-2">Volver al carrito</Link>
         </form>
