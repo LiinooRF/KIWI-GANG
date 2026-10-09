@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Nav } from 'react-bootstrap';
 import { validarCredenciales } from "../js/val_login.js"
 import { useState, useRef } from "react";
+import { buscarUsuarioPorCorreo, guardarSesion } from "../data/db.js"
 
 function Login() {
   //Estado inicial, vacio.
@@ -45,7 +46,13 @@ function Login() {
     passwordRef.current.setCustomValidity("");
 
     setLoginExitoso(true);
+    const usuario = buscarUsuarioPorCorreo(correo);
+    if (usuario !== null) {
+      guardarSesion(usuario);
+    }
   };
+
+  
 
     return (
     <>
