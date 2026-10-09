@@ -12,7 +12,7 @@ function Carrito() {
       <div className="formulario">
         <h1>Carrito</h1>
         <p>Tu carrito está vacío.</p>
-        <Link to="/productos" className="boton">Ver servicios</Link>
+        <Link to="/productos" className="boton">Ver productos</Link>
       </div>
     )
   }
