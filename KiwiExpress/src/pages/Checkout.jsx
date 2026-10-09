@@ -1,18 +1,22 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useCarrito } from '../context/CarritoContext.jsx'
-import { obtenerSesion } from '../data/db.js'
+import { obtenerSesion, buscarProductoPorId, agregarOrden, descontarStock } from '../data/db.js'
 import comunas from "../js/comunas";
 
 function Checkout() {
-  const { carrito, total } = useCarrito()
+  const { carrito, total, vaciarCarrito } = useCarrito()
   const navigate = useNavigate()
+  const location = useLocation()
   const [validated, setValidated] = useState(false)
+  const [errorStock, setErrorStock] = useState('')
 
-  // Si hay un usuario con sesión iniciada, sus datos llenan el formulario.
-  // La función dentro de useState (se llama "inicializador perezoso") se ejecuta
-  // una sola vez, al montar la página, en vez de leer localStorage en cada render.
   const [datos, setDatos] = useState(() => {
+    // Si venimos de un pago rechazado, la pantalla de error devuelve lo que el usuario
+    // había escrito (viaja en location.state). Tiene prioridad sobre los datos de la sesión.
+    if (location.state && location.state.datos) {
+      return location.state.datos
+    }
     const sesion = obtenerSesion()
     return {
       nombre: sesion ? sesion.nombre : '',
@@ -36,19 +40,50 @@ function Checkout() {
     setDatos({ ...datos, [name]: value })
   }
 
+function pagoAprobado() {
+    return Math.random() < 0.75
+  }
+
   function handleSubmit(e) {
     e.preventDefault()
-    // Activa la clase was-validated de Bootstrap: desde ahora marca los campos en rojo o verde
     setValidated(true)
+    setErrorStock('')
 
-    // checkValidity() revisa de una vez todos los required, pattern y maxLength del formulario
     if (!e.currentTarget.checkValidity()) {
       return
     }
 
-    navigate('/pago-correcto')
-  }
+    // Revisa el stock otra vez: pudo cambiar desde que se agregó al carrito.
+    // find devuelve el primer servicio que ya no alcanza, o undefined si todos alcanzan.
+    const sinStock = carrito.find((item) => {
+      const producto = buscarProductoPorId(item.id)
+      return producto === null || item.cantidad > producto.stock
+    })
+    if (sinStock) {
+      setErrorStock('No hay stock suficiente de "' + sinStock.nombre + '". Ajusta la cantidad en el carrito.')
+      return
+    }
 
+    if (!pagoAprobado()) {
+      // El state viaja con la navegación sin quedar escrito en la URL.
+      // Se mandan los datos del formulario para devolverlos al reintentar.
+      navigate('/pago-error', { state: { datos } })
+      return
+    }
+
+    // Pago aprobado. El orden importa: primero se guarda la orden (con una copia de lo
+    // comprado), luego se descuenta el stock y al final se vacía el carrito.
+    const orden = agregarOrden({
+      cliente: { nombre: datos.nombre, apellidos: datos.apellidos, correo: datos.correo, telefono: datos.telefono },
+      direccion: { calle: datos.calle, depto: datos.depto, region: datos.region, comuna: datos.comuna, indicaciones: datos.indicaciones },
+      items: carrito.map((item) => ({ id: item.id, nombre: item.nombre, precio: item.precio, cantidad: item.cantidad })),
+      total: total
+    })
+    carrito.forEach((item) => descontarStock(item.id, item.cantidad))
+    vaciarCarrito()
+    navigate('/pago-correcto/' + orden.numero)
+  }
+  
   // Los hooks (useState, useCarrito...) siempre van ANTES de cualquier return.
   // Por eso este return anticipado está después de todos ellos.
   if (carrito.length === 0) {
