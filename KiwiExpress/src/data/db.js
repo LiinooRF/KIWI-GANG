@@ -3,6 +3,7 @@
 
 import { productos, categorias, usuarios } from './productos.js'
 
+
 //las claves con las que guardamos en el navegador
 const CLAVE_PRODUCTOS = "kiwiProductos"
 const CLAVE_CATEGORIAS = "kiwiCategorias"
@@ -208,4 +209,35 @@ export function reiniciarDatos() {
   listaProductos = cargar(CLAVE_PRODUCTOS, productos)
   listaCategorias = cargar(CLAVE_CATEGORIAS, categorias)
   listaUsuarios = cargar(CLAVE_USUARIOS, usuarios)
+}
+
+// ---------- sesion ----------
+
+const CLAVE_SESION = "kiwiSesion"
+
+// Guarda quién inició sesión. Se arma el objeto campo por campo a propósito:
+// así la contraseña nunca queda guardada en localStorage.
+export function guardarSesion(usuario) {
+  const sesion = {
+    id: usuario.id,
+    nombre: usuario.nombre,
+    apellidos: usuario.apellidos,
+    correo: usuario.correo,
+    comuna: usuario.comuna,
+    rol: usuario.rol
+  }
+  localStorage.setItem(CLAVE_SESION, JSON.stringify(sesion))
+}
+
+// Devuelve el usuario con sesión iniciada, o null si nadie ha iniciado sesión
+export function obtenerSesion() {
+  const guardado = localStorage.getItem(CLAVE_SESION)
+  if (guardado === null) {
+    return null
+  }
+  return JSON.parse(guardado)
+}
+
+export function cerrarSesion() {
+  localStorage.removeItem(CLAVE_SESION)
 }
