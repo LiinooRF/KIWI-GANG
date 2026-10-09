@@ -52,6 +52,12 @@ module.exports = function (config) {
       resolve: { extensions: ['.js', '.jsx'] }
     },
 
+    //NOTA TESTS DE PROPS - BOTON
+    /*
+    Instale los paquetes karma-firefox-launcher, @testing-library/react y karma-spec-reporter con --save-dev 
+    para testear en mi Firefox, cambiando el browser. Lo deje como lo encontre y los test fueron exitosos.
+    */
+
     // Chrome sin ventana: más rápido y no se abre ni se cierra nada en pantalla
     browsers: ['ChromeHeadless'],
 

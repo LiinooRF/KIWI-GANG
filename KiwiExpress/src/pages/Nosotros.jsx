@@ -23,7 +23,7 @@ function Nosotros() {
 
         <div className="mt-5 text-start">
           <h2> Nuestro trayecto </h2>
-          <iframe className="ratio ratio-16x9 minimumIframe" src="https://www.youtube.com/embed/kKnlROxBHi8?si=kpkYzJu9-8a-01kh" title="KiwiExpressExample-Test" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe className="ratio ratio-16x9 minimumIframe" src="https://www.youtube.com/embed/kKnlROxBHi8?si=kpkYzJu9-8a-01kh" title="KiwiExpressExample-Test" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
           <p>(Video de referencia, no corresponde al video oficial de KiwiExpress.)</p>
 
         </div>
