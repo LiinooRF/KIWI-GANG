@@ -14,8 +14,8 @@ function DetalleProducto() {
   if (!producto) {
     return (
       <div className="formulario">
-        <h1>Servicio no encontrado</h1>
-        <Link to="/productos" className="boton">Volver a servicios</Link>
+        <h1>Producto no encontrado</h1>
+        <Link to="/productos" className="boton">Volver a Productos</Link>
       </div>
     )
   }

@@ -241,3 +241,41 @@ export function obtenerSesion() {
 export function cerrarSesion() {
   localStorage.removeItem(CLAVE_SESION)
 }
+
+// ---------- ordenes ----------
+
+const CLAVE_ORDENES = "kiwiOrdenes"
+let listaOrdenes = cargar(CLAVE_ORDENES, [])
+
+export function listarOrdenes() {
+  return listaOrdenes
+}
+
+export function buscarOrdenPorNumero(numero) {
+  return listaOrdenes.find(o => o.numero === numero) || null
+}
+
+// Guarda una compra aprobada. Recibe cliente, dirección, servicios y total,
+// y le agrega el id, el número de orden y la fecha.
+export function agregarOrden(datosOrden) {
+  const id = nuevoId(listaOrdenes)
+  const orden = {
+    ...datosOrden,
+    id: id,
+    // Número que ve el cliente: KX-ORD-1001, KX-ORD-1002, etc.
+    numero: "KX-ORD-" + (1000 + id),
+    fecha: new Date().toISOString()
+  }
+  listaOrdenes.push(orden)
+  guardar(CLAVE_ORDENES, listaOrdenes)
+  return orden
+}
+
+// Resta del stock las unidades vendidas. Math.max evita que quede en negativo.
+export function descontarStock(id, cantidad) {
+  const producto = buscarProductoPorId(id)
+  if (producto !== null) {
+    producto.stock = Math.max(0, producto.stock - cantidad)
+    guardar(CLAVE_PRODUCTOS, listaProductos)
+  }
+}
