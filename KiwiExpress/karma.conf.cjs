@@ -1,5 +1,7 @@
 // Se usa la extensión .cjs (CommonJS) porque el package.json de KiwiExpress
 // tiene "type": "module". Con .js, "module.exports" daría error.
+const path = require('path')
+
 module.exports = function (config) {
   config.set({
     basePath: '',
@@ -24,6 +26,11 @@ module.exports = function (config) {
 
     webpack: {
       mode: 'development',
+
+      // NUEVO: genera mapas que relacionan el código compilado con el original.
+      // Sirven para que el reporte de cobertura muestre las líneas reales de cada archivo.
+      devtool: 'inline-source-map',
+
       module: {
         rules: [
           {
@@ -44,19 +51,29 @@ module.exports = function (config) {
                 ]
               }
             }
+          },
+
+          // NUEVO: mide la cobertura del código de src/.
+          // "Instrumentar" = agregar contadores invisibles que anotan qué líneas se ejecutaron
+          // mientras corren los tests. enforce: 'post' hace que esta regla corra DESPUÉS de Babel,
+          // e include limita la medición a src/ (así no se miden los tests ni las librerías).
+          {
+            test: /\.jsx?$/,
+            include: path.resolve(__dirname, 'src'),
+            enforce: 'post',
+            use: {
+              loader: '@jsdevtools/coverage-istanbul-loader',
+              // esModules: true le avisa que el código usa import/export
+              options: { esModules: true }
+            }
           }
         ]
       },
+
       // Permite importar sin escribir la extensión:
       // import Boton from '../src/components/layout/Boton'  (en vez de Boton.jsx)
       resolve: { extensions: ['.js', '.jsx'] }
     },
-
-    //NOTA TESTS DE PROPS - BOTON
-    /*
-    Instale los paquetes karma-firefox-launcher, @testing-library/react y karma-spec-reporter con --save-dev 
-    para testear en mi Firefox, cambiando el browser. Lo deje como lo encontre y los test fueron exitosos.
-    */
 
     // Chrome sin ventana: más rápido y no se abre ni se cierra nada en pantalla
     browsers: ['ChromeHeadless'],
@@ -64,7 +81,20 @@ module.exports = function (config) {
     // Corre todos los tests una vez y termina (si no, Karma queda esperando para siempre)
     singleRun: true,
 
-    // Muestra una barra de progreso y el resultado final en la terminal
-    reporters: ['progress']
+    // NUEVO: se suma 'coverage', que arma el reporte con lo que midieron los contadores
+    reporters: ['progress', 'coverage'],
+
+    // NUEVO: dónde y en qué formatos se guarda el reporte
+    coverageReporter: {
+      dir: 'coverage',
+      reporters: [
+        // Reporte navegable: se abre coverage/html/index.html en el navegador
+        { type: 'html', subdir: 'html' },
+        // Tabla de cobertura por archivo guardada en coverage/cobertura.txt
+        { type: 'text', subdir: '.', file: 'cobertura.txt' },
+        // Resumen con los porcentajes totales, que se imprime en la terminal
+        { type: 'text-summary' }
+      ]
+    }
   })
 }
