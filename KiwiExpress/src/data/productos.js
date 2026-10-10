@@ -1,11 +1,5 @@
 //servicios de envio que ofrece kiwiexpress, hacen de productos de la tienda
 //por ahora estan aca, mas adelante van a salir de una base de datos
-import fotoEnvios from "../assets/images/envio-estandar.png"
-import fotoKit from "../assets/images/kit-fragil.jpg"
-import fotoCaja from "../assets/images/caja-mediana.jpg"
-import fotoDomicilio from "../assets/images/domicilio.png"
-import fotoSeguro from "../assets/images/seguro.png"
-
 export const productos = [
   {
     id: 1,
@@ -16,7 +10,7 @@ export const productos = [
     stock: 50,
     stockCritico: 10,
     categoria: "No Frágil",
-    imagen: fotoEnvios,
+    imagen: "/img/envio-estandar.png",
     enOferta: false,
     precioOferta: 0
   },
@@ -29,7 +23,7 @@ export const productos = [
     stock: 30,
     stockCritico: 10,
     categoria: "No Frágil",
-    imagen: fotoEnvios,
+    imagen: "/img/envio-estandar.png",
     enOferta: true,
     precioOferta: 5490
   },
@@ -42,7 +36,7 @@ export const productos = [
     stock: 20,
     stockCritico: 5,
     categoria: "Frágil",
-    imagen: fotoEnvios,
+    imagen: "/img/envio-estandar.png",
     enOferta: false,
     precioOferta: 0
   },
@@ -55,7 +49,7 @@ export const productos = [
     stock: 120,
     stockCritico: 25,
     categoria: "No Frágil",
-    imagen: fotoCaja,
+    imagen: "/img/caja-mediana.jpg",
     enOferta: false,
     precioOferta: 0
   },
@@ -68,7 +62,7 @@ export const productos = [
     stock: 8,
     stockCritico: 15,
     categoria: "Frágil",
-    imagen: fotoKit,
+    imagen: "/img/kit-fragil.jpg",
     enOferta: true,
     precioOferta: 3490
   },
@@ -81,7 +75,7 @@ export const productos = [
     stock: 100,
     stockCritico: 20,
     categoria: "No Frágil",
-    imagen: fotoSeguro,
+    imagen: "/img/seguro.png",
     enOferta: false,
     precioOferta: 0
   },
@@ -94,7 +88,7 @@ export const productos = [
     stock: 40,
     stockCritico: 10,
     categoria: "No Frágil",
-    imagen: fotoDomicilio,
+    imagen: "/img/domicilio.png",
     enOferta: false,
     precioOferta: 0
   },
@@ -107,7 +101,7 @@ export const productos = [
     stock: 4,
     stockCritico: 8,
     categoria: "Frágil",
-    imagen: fotoEnvios,
+    imagen: "/img/envio-estandar.png",
     enOferta: true,
     precioOferta: 9990
   }
