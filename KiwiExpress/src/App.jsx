@@ -20,6 +20,9 @@ import NoEncontrada from './pages/NoEncontrada.jsx'
 import PagoCorrecto from './pages/PagoCorrecto.jsx'
 import PagoError from './pages/PagoError.jsx'
 import AdminDashboard from './pages/AdminDashboard.jsx'
+import AdminOrdenes from './pages/AdminOrdenes.jsx'
+import AdminCategorias from './pages/AdminCategorias.jsx'
+import AdminReportes from './pages/AdminReportes.jsx'
 
 // Envuelve las páginas públicas con el Header y el Footer. <Outlet /> es el hueco
 // donde se dibuja la página que corresponde a la URL. Layout no se modificó:
@@ -55,6 +58,12 @@ function App() {
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/login" element={<Login />} />
             <Route path="/registro" element={<Registro />} />
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<AdminDashboard />} />
+              <Route path="ordenes" element={<AdminOrdenes />} />
+              <Route path="categorias" element={<AdminCategorias />} />
+              <Route path="reportes" element={<AdminReportes />} />
+            </Route>
             <Route path="*" element={<NoEncontrada />} />
           </Route>
 
