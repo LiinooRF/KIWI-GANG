@@ -76,7 +76,16 @@ module.exports = function (config) {
     },
 
     // Chrome sin ventana: más rápido y no se abre ni se cierra nada en pantalla
-    browsers: ['ChromeHeadless'],
+    // en github actions chrome corre como root y no arranca sin --no-sandbox,
+    // por eso usamos un launcher propio cuando estamos en el CI
+    browsers: [process.env.CI ? 'ChromeHeadlessCI' : 'ChromeHeadless'],
+
+    customLaunchers: {
+      ChromeHeadlessCI: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage']
+      }
+    },
 
     // Corre todos los tests una vez y termina (si no, Karma queda esperando para siempre)
     singleRun: true,
