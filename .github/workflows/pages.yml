@@ -33,11 +33,6 @@ jobs:
         run: npm run build
         working-directory: KiwiExpress
 
-      - name: Dejar el sitio de la entrega 1 en la carpeta entrega1
-        run: |
-          mkdir -p KiwiExpress/dist/entrega1
-          cp -r *.html assets admin KiwiExpress/dist/entrega1/
-
       - name: Preparar la publicacion
         uses: actions/configure-pages@v5
 
