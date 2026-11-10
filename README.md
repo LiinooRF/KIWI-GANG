@@ -15,26 +15,13 @@ y usuarios desde un panel aparte.
 
 ## Tecnologias
 
-- HTML5
-- CSS (hoja de estilos propia en assets/css/estilos.css)
-- JavaScript
-- Bootstrap 5
+- React 19
+- Vite
+- React Router
+- react-bootstrap
 - El sitio esta publicado con GitHub Pages
 
-## Paginas del sitio
-
-- index.html: pagina principal
-- seguimiento.html: buscador de envios por codigo
-- envio.html: formulario para solicitar un envio, guarda los paquetes en localStorage
-- registro.html y login.html: registro e inicio de sesion con validaciones
-- nosotros.html, blogs.html y contacto.html: paginas informativas
-- admin.html, admin-usuarios.html y admin-envios.html: panel de administracion
-
-## Version React (entrega 2)
-
-Para la entrega 2 el sitio se migro a React y queda en la carpeta KiwiExpress.
-
-Para correrlo:
+## Como correrlo
 
 ```
 cd KiwiExpress
@@ -44,8 +31,7 @@ npm run dev
 
 Y para generar la version de produccion se usa npm run build.
 
-Las tecnologias que agregamos son React, Vite, React Router y react-bootstrap, y las
-pruebas unitarias se hacen con Jasmine y Karma.
+Las pruebas unitarias se hacen con Jasmine y Karma, con `npm test`.
 
 ## Mockups
 
@@ -54,9 +40,6 @@ Los mockups del sitio los hicimos en Figma antes de programar y estan en la carp
 ## Como verlo
 
 El sitio esta publicado en https://liinoorf.github.io/KIWI-GANG/
-
-Si lo quieres ver en tu computador solo tienes que clonar el repositorio y abrir el
-index.html en el navegador, no necesita instalar nada.
 
 ## Organizacion del trabajo
 
