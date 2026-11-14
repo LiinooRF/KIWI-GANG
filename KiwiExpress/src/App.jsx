@@ -24,6 +24,11 @@ import AdminOrdenes from './pages/AdminOrdenes.jsx'
 import AdminCategorias from './pages/AdminCategorias.jsx'
 import AdminReportes from './pages/AdminReportes.jsx'
 import AdminProductos from './pages/AdminProductos.jsx'
+import { AuthProvider } from './context/AuthContext.jsx'
+
+//Se añade ruta protegida para evitar entrar por direccion, y roles apra gestrionar a donde puede entrar quien.
+import { RutaProtegida } from './components/RutaProtegida.jsx';
+import { ROLES } from './js/permisos.js';
 
 // Envuelve las páginas públicas con el Header y el Footer. <Outlet /> es el hueco
 // donde se dibuja la página que corresponde a la URL. Layout no se modificó:
@@ -38,6 +43,7 @@ function LayoutPublico() {
 
 function App() {
   return (
+    <AuthProvider>
     <CarritoProvider>
       <HashRouter>
         <Routes>
@@ -59,27 +65,31 @@ function App() {
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/login" element={<Login />} />
             <Route path="/registro" element={<Registro />} />
-            <Route path="/admin" element={<AdminLayout />}>
-              <Route index element={<AdminDashboard />} />
-              <Route path="ordenes" element={<AdminOrdenes />} />
-              <Route path="categorias" element={<AdminCategorias />} />
-              <Route path="reportes" element={<AdminReportes />} />
-              <Route path="productos" element={<AdminProductos />} />
-            </Route>
             <Route path="*" element={<NoEncontrada />} />
-          </Route>
 
-          {/* Panel de administración: tiene su propio menú lateral y no lleva
+          </Route>
+            {/* Panel de administración: tiene su propio menú lateral y no lleva
               el Header ni el Footer públicos */}
-          <Route path="/admin" element={<AdminLayout />}>
-            {/* index = la página que se muestra en /admin exacto */}
-            <Route index element={<AdminDashboard />} />
-            {/* La #80 y la #81 agregan aquí sus rutas: ordenes, productos, categorias, reportes... */}
+          <Route element={<RutaProtegida rolesPermitidos={[ROLES.ADMIN, ROLES.OPERARIO]} />}>
+            <Route path="/admin" element={<AdminLayout />}>
+              
+              {/* Rutas que ven AMBOS (Admin y Operario) */}
+              <Route path="ordenes" element={<AdminOrdenes />} />
+              <Route path="productos" element={<AdminProductos />} />
+
+              {/* Rutas SOLO para Admin */}
+              <Route element={<RutaProtegida rolesPermitidos={[ROLES.ADMIN]} />}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="categorias" element={<AdminCategorias />} />
+                <Route path="reportes" element={<AdminReportes />} />
+              </Route>
+            </Route>
           </Route>
         </Routes>
       </HashRouter>
     </CarritoProvider>
-  )
+    </AuthProvider>  
+    )
 }
 
 export default App
