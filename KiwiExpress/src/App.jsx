@@ -70,10 +70,10 @@ function App() {
           </Route>
             {/* Panel de administración: tiene su propio menú lateral y no lleva
               el Header ni el Footer públicos */}
-          <Route element={<RutaProtegida rolesPermitidos={[ROLES.ADMIN, ROLES.OPERARIO]} />}>
+          <Route element={<RutaProtegida rolesPermitidos={[ROLES.ADMIN, ROLES.VENDEDOR]} />}>
             <Route path="/admin" element={<AdminLayout />}>
               
-              {/* Rutas que ven AMBOS (Admin y Operario) */}
+              {/* Rutas que ven AMBOS (Admin y Vendedor) */}
               <Route path="ordenes" element={<AdminOrdenes />} />
               <Route path="productos" element={<AdminProductos />} />
 
