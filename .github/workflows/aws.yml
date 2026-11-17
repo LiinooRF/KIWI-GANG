@@ -1,0 +1,48 @@
+name: Publicar en AWS
+
+# solo cuando el cambio ya esta en staging, nunca en los pull request
+on:
+  push:
+    branches: [staging]
+  workflow_dispatch:
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Bajar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: KiwiExpress/package-lock.json
+
+      - name: Instalar dependencias
+        run: npm ci
+        working-directory: KiwiExpress
+
+      # en s3 la app va en la raiz del bucket y la url del api sale de una variable del repo
+      - name: Construir el proyecto
+        run: npm run build
+        working-directory: KiwiExpress
+        env:
+          VITE_BASE: /
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+
+      # el learner lab da tres credenciales que se vencen como a las 4 horas
+      - name: Subir al bucket de s3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+          AWS_DEFAULT_REGION: us-east-1
+          BUCKET: ${{ vars.S3_BUCKET }}
+        run: |
+          if [ -z "$BUCKET" ] || [ -z "$AWS_SESSION_TOKEN" ]; then
+            echo "falta la variable S3_BUCKET o los secrets de aws, no se publica (ver el readme)"
+            exit 0
+          fi
+          aws s3 sync KiwiExpress/dist s3://$BUCKET --delete
