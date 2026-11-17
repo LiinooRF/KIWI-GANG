@@ -9,6 +9,9 @@ on:
 jobs:
   publicar:
     runs-on: ubuntu-latest
+    env:
+      EC2_HOST: ${{ secrets.EC2_HOST }}
+      EC2_KEY: ${{ secrets.EC2_KEY }}
     steps:
       - name: Bajar el repositorio
         uses: actions/checkout@v4
@@ -24,25 +27,24 @@ jobs:
         run: npm ci
         working-directory: KiwiExpress
 
-      # en s3 la app va en la raiz del bucket y la url del api sale de una variable del repo
+      # en la ec2 la app va en la raiz y el api esta en la misma ip en el puerto 8080
       - name: Construir el proyecto
         run: npm run build
         working-directory: KiwiExpress
         env:
           VITE_BASE: /
-          VITE_API_URL: ${{ vars.VITE_API_URL }}
+          VITE_API_URL: http://${{ secrets.EC2_HOST }}:8080/api/v1
 
-      # el learner lab da tres credenciales que se vencen como a las 4 horas
-      - name: Subir al bucket de s3
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-          AWS_DEFAULT_REGION: us-east-1
-          BUCKET: ${{ vars.S3_BUCKET }}
+      # borra la version de antes y levanta un nginx con la nueva en el puerto 80
+      - name: Subir a la ec2
         run: |
-          if [ -z "$BUCKET" ] || [ -z "$AWS_SESSION_TOKEN" ]; then
-            echo "falta la variable S3_BUCKET o los secrets de aws, no se publica (ver el readme)"
+          if [ -z "$EC2_HOST" ] || [ -z "$EC2_KEY" ]; then
+            echo "faltan los secrets EC2_HOST o EC2_KEY, no se publica (ver el readme)"
             exit 0
           fi
-          aws s3 sync KiwiExpress/dist s3://$BUCKET --delete
+          echo "$EC2_KEY" > llave.pem
+          chmod 600 llave.pem
+          ssh -i llave.pem -o StrictHostKeyChecking=no ec2-user@$EC2_HOST "rm -rf /home/ec2-user/front"
+          scp -r -i llave.pem -o StrictHostKeyChecking=no KiwiExpress/dist ec2-user@$EC2_HOST:/home/ec2-user/front
+          ssh -i llave.pem -o StrictHostKeyChecking=no ec2-user@$EC2_HOST "docker rm -f kiwi-front 2>/dev/null; docker run -d --name kiwi-front --restart unless-stopped -p 80:80 -v /home/ec2-user/front:/usr/share/nginx/html:ro nginx:alpine"
+          rm llave.pem
