@@ -2,7 +2,12 @@ import { Link } from 'react-router-dom'
 import { Nav } from 'react-bootstrap';
 import { validarCredenciales } from "../js/val_login.js"
 import { useState, useRef } from "react";
-import { buscarUsuarioPorCorreo, guardarSesion } from "../data/db.js"
+import { buscarUsuarioPorCorreo} from "../data/db.js"
+
+//Nuevos importes para la nav por usuario.
+import { useAuth } from '../context/AuthContext';
+import { ROLES } from '../js/permisos.js';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   //Estado inicial, vacio.
@@ -10,6 +15,9 @@ function Login() {
   const [contrasena, setContrasena] = useState("");
   const [validated, setValidated] = useState(false);
   const [loginExitoso, setLoginExitoso] = useState(false);
+
+   const { login } = useAuth(); 
+   const navigate = useNavigate();
 
   //variables referenciales para el manejo de errores
   const correoRef = useRef(null);
@@ -46,10 +54,24 @@ function Login() {
     passwordRef.current.setCustomValidity("");
 
     setLoginExitoso(true);
+    //Se gestiona el login con auth.
     const usuario = buscarUsuarioPorCorreo(correo);
     if (usuario !== null) {
-      guardarSesion(usuario);
-    }
+      login(usuario)
+
+      setTimeout(() => {
+        const rol = usuario.rol?.toLowerCase();
+
+        //con useNavigate, luego del login, se toma 1 segundo y reenvia a una vista pertinente.
+        if (rol === ROLES.ADMIN) {
+          navigate('/admin');
+        } else if (rol === ROLES.OPERARIO) {
+          navigate('/admin/productos');
+        } else {
+          navigate('/');
+        }
+        }, 1000);
+    } 
   };
 
   
@@ -146,8 +168,6 @@ function Login() {
           </tr>
         </tbody>
       </table>
-      {/*Falta jsx de admin*/}
-      <p className="mt-3" > <u> <Nav.Link as={Link} to="/admin" className="d-inline p-0 text-primary">Ir al panel de administración</Nav.Link> </u> </p>
     </section>
   </main>
   </>
