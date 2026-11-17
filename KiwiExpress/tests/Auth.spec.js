@@ -24,12 +24,12 @@ describe('auth.js', () => {
     spyOn(window, 'fetch').and.returnValue(
       respuesta(200, { token, nombre: 'Rodrigo', correo: 'admin@kiwi.cl', rol: 'administrador' })
     )
-    const usuario = await iniciarSesionApi('admin@kiwi.cl', 'admin123')
+    const usuario = await iniciarSesionApi('admin@kiwi.cl', 'clave-secreta-de-prueba')
 
     expect(obtenerToken()).toBe(token)
     expect(usuario.rol).toBe('administrador')
     // la contraseña no queda guardada en ninguna parte
-    expect(JSON.stringify(localStorage)).not.toContain('admin123')
+    expect(JSON.stringify(localStorage)).not.toContain('clave-secreta-de-prueba')
   })
 
   it('devuelve null y no guarda nada si la clave esta mal', async () => {
