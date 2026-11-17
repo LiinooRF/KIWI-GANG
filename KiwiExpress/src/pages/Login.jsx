@@ -65,7 +65,7 @@ function Login() {
         //con useNavigate, luego del login, se toma 1 segundo y reenvia a una vista pertinente.
         if (rol === ROLES.ADMIN) {
           navigate('/admin');
-        } else if (rol === ROLES.OPERARIO) {
+        } else if (rol === ROLES.VENDEDOR) {
           navigate('/admin/productos');
         } else {
           navigate('/');
