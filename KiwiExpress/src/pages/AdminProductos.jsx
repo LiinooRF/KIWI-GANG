@@ -1,10 +1,17 @@
 import { useState } from 'react'
 import { listarProductos, listarCategorias, editarProducto, eliminarProducto } from '../data/db.js'
 
+import { useAuth } from '../context/AuthContext';
+import { esAdmin } from '../js/permisos';
+
 // Formatea un número como pesos chilenos: 3990 -> $3.990
 const pesos = (n) => '$' + n.toLocaleString('es-CL')
 
 function AdminProductos() {
+ //Estas constantes se usan para definir si el usuairo puede gestionar el inventario (admin) o no (operario)
+  const { usuario } = useAuth();
+  const puedeGestionar = esAdmin(usuario?.rol);
+
   // Se guarda una COPIA de la lista ([...]). db.js modifica su propio arreglo, y si el estado
   // apuntara a ese mismo arreglo, React no notaría el cambio y la pantalla no se actualizaría.
   const [productos, setProductos] = useState(() => [...listarProductos()])
@@ -165,7 +172,9 @@ function AdminProductos() {
                 <th>Categoría</th>
                 <th>Precio</th>
                 <th>Stock</th>
-                <th></th>
+                {puedeGestionar && (
+                <th> Opciones </th>
+                )}
               </tr>
             </thead>
             <tbody>
@@ -180,6 +189,8 @@ function AdminProductos() {
                   </td>
                   {/* El stock es solo para consultar, no se edita desde esta vista */}
                   <td>{producto.stock}</td>
+                  {/* Aqui se filtra con auth los botones de gestion.*/}
+                  {puedeGestionar && (
                   <td>
                     <button className="btn btn-sm btn-success" onClick={() => handleEditar(producto)}>
                       Editar
@@ -188,6 +199,7 @@ function AdminProductos() {
                       Eliminar
                     </button>
                   </td>
+                  )}
                 </tr>
               ))}
             </tbody>
