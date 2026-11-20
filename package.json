@@ -18,7 +18,6 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "tailwinddev": "npx @tailwindcss/cli -i ./assets/src/style.css -o ./assets/css/style.css --watch"
   },
   "dependencies": {
