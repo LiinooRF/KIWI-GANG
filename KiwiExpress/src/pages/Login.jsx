@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Nav } from 'react-bootstrap';
-import { validarCredenciales } from "../js/val_login.js"
 import { useState, useRef } from "react";
-import { buscarUsuarioPorCorreo} from "../data/db.js"
+import { iniciarSesionApi } from "../data/auth.js"
 
 //Nuevos importes para la nav por usuario.
 import { useAuth } from '../context/AuthContext';
@@ -40,23 +39,23 @@ function Login() {
       return;
     }
 
-    //la variable que define si las credenciales coinciden.
-    const esValido = validarCredenciales(correo, contrasena);
+    //Se le pregunta al api si el correo y la clave estan bien.
+    //Si estan bien devuelve el usuario con su rol, si no devuelve null.
+    const revisarLogin = async () => {
+      const usuario = await iniciarSesionApi(correo, contrasena);
 
-    if (!esValido) {
-      setLoginExitoso(false)
-      correoRef.current.setCustomValidity("Credenciales incorrectas");
-      passwordRef.current.setCustomValidity("Credenciales incorrectas");
-      return;
-    }
+      if (usuario === null) {
+        setLoginExitoso(false)
+        correoRef.current.setCustomValidity("Credenciales incorrectas");
+        passwordRef.current.setCustomValidity("Credenciales incorrectas");
+        return;
+      }
 
-    correoRef.current.setCustomValidity("");
-    passwordRef.current.setCustomValidity("");
+      correoRef.current.setCustomValidity("");
+      passwordRef.current.setCustomValidity("");
 
-    setLoginExitoso(true);
-    //Se gestiona el login con auth.
-    const usuario = buscarUsuarioPorCorreo(correo);
-    if (usuario !== null) {
+      setLoginExitoso(true);
+      //Se gestiona el login con auth, el token ya quedo guardado en iniciarSesionApi.
       login(usuario)
 
       setTimeout(() => {
@@ -65,13 +64,16 @@ function Login() {
         //con useNavigate, luego del login, se toma 1 segundo y reenvia a una vista pertinente.
         if (rol === ROLES.ADMIN) {
           navigate('/admin');
-        } else if (rol === ROLES.OPERARIO) {
+        } else if (rol === 'vendedor' || rol === ROLES.OPERARIO) {
+          //el rol se llama vendedor en el api, antes operario en el front
           navigate('/admin/productos');
         } else {
           navigate('/');
         }
-        }, 1000);
-    } 
+      }, 1000);
+    }
+
+    revisarLogin();
   };
 
   
