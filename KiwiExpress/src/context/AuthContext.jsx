@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { cerrarSesion, guardarSesion, obtenerSesion } from '../data/db';
+import { obtenerToken, tokenVigente } from '../data/auth';
 
 //Crea el context, el contenedor global donde vive la info de la sesion.
 const AuthContext = createContext();
@@ -13,8 +14,12 @@ export const AuthProvider = ({ children }) => {
     //se le asigna el usuario de localstorage a usuarioGuardado, al tener algo guardado es verdadero, y esto se guarda en el set.
     //Esto es para cuando se recarga la pagina, rescata al usuairo en sesion de no haberla cerrado.
     const usuarioGuardado = obtenerSesion()
-    if (usuarioGuardado) {
+    const token = obtenerToken()
+    //si el token ya venia vencido no se rescata la sesion, hay que volver a loguearse
+    if (usuarioGuardado && token && tokenVigente(token)) {
       setUsuario(usuarioGuardado);
+    } else if (usuarioGuardado) {
+      cerrarSesion();
     }
     setCargando(false);
   }, []); //Los corchetes vacios detienen la ejecucion de esto tras la primera vez. asi solo lo hace al cargar la pagina.
