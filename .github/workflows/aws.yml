@@ -46,5 +46,6 @@ jobs:
           chmod 600 llave.pem
           ssh -i llave.pem -o StrictHostKeyChecking=no ec2-user@$EC2_HOST "rm -rf /home/ec2-user/front"
           scp -r -i llave.pem -o StrictHostKeyChecking=no KiwiExpress/dist ec2-user@$EC2_HOST:/home/ec2-user/front
-          ssh -i llave.pem -o StrictHostKeyChecking=no ec2-user@$EC2_HOST "docker rm -f kiwi-front 2>/dev/null; docker run -d --name kiwi-front --restart unless-stopped -p 80:80 -v /home/ec2-user/front:/usr/share/nginx/html:ro nginx:alpine"
+          #si la maquina es nueva y no tiene docker, se instala sola
+          ssh -i llave.pem -o StrictHostKeyChecking=no ec2-user@$EC2_HOST "command -v docker >/dev/null || sudo dnf install -y docker; sudo systemctl enable --now docker; sudo docker rm -f kiwi-front 2>/dev/null; sudo docker run -d --name kiwi-front --restart unless-stopped -p 80:80 -v /home/ec2-user/front:/usr/share/nginx/html:ro nginx:alpine"
           rm llave.pem
