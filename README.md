@@ -15,20 +15,23 @@ y usuarios desde un panel aparte.
 
 ## Tecnologias
 
-- HTML5
-- CSS (hoja de estilos propia en assets/css/estilos.css)
-- JavaScript
-- Bootstrap 5
+- React 19
+- Vite
+- React Router
+- react-bootstrap
 - El sitio esta publicado con GitHub Pages
 
-## Paginas del sitio
+## Como correrlo
 
-- index.html: pagina principal
-- seguimiento.html: buscador de envios por codigo
-- envio.html: formulario para solicitar un envio, guarda los paquetes en localStorage
-- registro.html y login.html: registro e inicio de sesion con validaciones
-- nosotros.html, blogs.html y contacto.html: paginas informativas
-- admin.html, admin-usuarios.html y admin-envios.html: panel de administracion
+```
+cd KiwiExpress
+npm install
+npm run dev
+```
+
+Y para generar la version de produccion se usa npm run build.
+
+Las pruebas unitarias se hacen con Jasmine y Karma, con `npm test`.
 
 ## Mockups
 
@@ -38,8 +41,24 @@ Los mockups del sitio los hicimos en Figma antes de programar y estan en la carp
 
 El sitio esta publicado en https://liinoorf.github.io/KIWI-GANG/
 
-Si lo quieres ver en tu computador solo tienes que clonar el repositorio y abrir el
-index.html en el navegador, no necesita instalar nada.
+## Publicar en AWS (learner lab)
+
+Todo el proyecto queda en una sola EC2 con docker: el frontend con nginx en el puerto 80 y el
+backend con mysql en el 8080. Como preparar la EC2 esta explicado en el README del repo
+KIWI-GANG-API (solo hay que instalar docker).
+
+El workflow `.github/workflows/aws.yml` compila el react y lo sube a la EC2 cada vez que algo
+llega a staging, borrando la version anterior. En los pull request no corre.
+
+En settings > secrets and variables > actions de este repo van dos secrets:
+
+- `EC2_HOST`: la ip publica de la instancia
+- `EC2_KEY`: el contenido completo de `labsuser.pem`
+
+Si faltan el workflow avisa y no publica. Cuando se reinicia el lab la IP cambia, hay que
+actualizar `EC2_HOST` y volver a correr el workflow desde la pestaña actions.
+
+Para correrlo en local se copia `KiwiExpress/.env.example` como `.env`.
 
 ## Organizacion del trabajo
 
