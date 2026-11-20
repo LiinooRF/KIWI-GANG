@@ -55,8 +55,10 @@ En settings > secrets and variables > actions de este repo van dos secrets:
 - `EC2_HOST`: la ip publica de la instancia
 - `EC2_KEY`: el contenido completo de `labsuser.pem`
 
-Si faltan el workflow avisa y no publica. Cuando se reinicia el lab la IP cambia, hay que
-actualizar `EC2_HOST` y volver a correr el workflow desde la pestaña actions.
+Si faltan el workflow avisa y no publica. La IP de la EC2 se deja fija con una elastic ip
+(explicado en el README del repo KIWI-GANG-API), asi prender la maquina un dia normal no
+requiere tocar nada aca. Solo si la IP llegara a cambiar hay que actualizar `EC2_HOST` en los
+dos repos y correr el workflow de nuevo, porque la url del api queda escrita al compilar.
 
 Para correrlo en local se copia `KiwiExpress/.env.example` como `.env`.
 
