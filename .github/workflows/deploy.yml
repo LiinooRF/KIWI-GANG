@@ -1,0 +1,50 @@
+name: Deploy a AWS
+
+# deploy del front, el backend se sube desde su repo
+
+on:
+  push:
+    branches: [staging]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: bajar el codigo
+        uses: actions/checkout@v4
+
+      - name: instalar node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: compilar el frontend
+        run: |
+          cd KiwiExpress
+          npm ci
+          npm run build
+        env:
+          # en la ec2 la pagina va en la raiz
+          VITE_BASE: /
+          VITE_API_URL: http://${{ secrets.EC2_HOST }}:8080/api/v1
+
+      - name: subir la pagina a la ec2 y desplegar
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_KEY: ${{ secrets.EC2_KEY }}
+        run: |
+          if [ -z "$EC2_HOST" ] || [ -z "$EC2_KEY" ]; then
+            echo "faltan los secrets de la ec2 (ver el readme)"
+            exit 0
+          fi
+          echo "$EC2_KEY" > llave.pem
+          chmod 600 llave.pem
+
+          ssh -i llave.pem -o StrictHostKeyChecking=no ec2-user@$EC2_HOST "rm -rf /home/ec2-user/front"
+          scp -r -i llave.pem -o StrictHostKeyChecking=no KiwiExpress/dist ec2-user@$EC2_HOST:/home/ec2-user/front
+          scp -i llave.pem -o StrictHostKeyChecking=no deploy/desplegar.sh ec2-user@$EC2_HOST:/home/ec2-user/desplegar.sh
+
+          ssh -i llave.pem -o StrictHostKeyChecking=no ec2-user@$EC2_HOST "bash desplegar.sh"
+
+          rm llave.pem
