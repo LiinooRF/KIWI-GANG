@@ -63,3 +63,18 @@ export async function pedirApi(ruta, opciones = {}) {
   }
   return respuesta
 }
+
+//Crea la cuenta en el api con el registro publico (siempre queda como cliente).
+//Si salio bien devuelve null, si no devuelve un mensaje para mostrar.
+export async function registrarApi(datos) {
+  const respuesta = await fetch(`${API_URL}/auth/registro`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(datos)
+  })
+  if (respuesta.status === 201) {
+    return null
+  }
+  //el 409 es cuando el correo ya esta registrado
+  return 'No se pudo crear la cuenta, puede que el correo ya esté registrado.'
+}
