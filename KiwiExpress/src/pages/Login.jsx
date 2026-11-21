@@ -64,8 +64,7 @@ function Login() {
         //con useNavigate, luego del login, se toma 1 segundo y reenvia a una vista pertinente.
         if (rol === ROLES.ADMIN) {
           navigate('/admin');
-        } else if (rol === 'vendedor' || rol === ROLES.OPERARIO) {
-          //el rol se llama vendedor en el api, antes operario en el front
+        } else if (rol === ROLES.VENDEDOR) {
           navigate('/admin/productos');
         } else {
           navigate('/');
@@ -159,7 +158,7 @@ function Login() {
             <td>admin123</td>
           </tr>
           <tr>
-            <td>Operario</td>
+            <td>Vendedor</td>
             <td>javieradiaz@duoc.cl</td>
             <td>oper123</td>
           </tr>
