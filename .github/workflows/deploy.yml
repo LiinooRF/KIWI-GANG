@@ -1,8 +1,6 @@
 name: Deploy a AWS
 
-# este es el deploy del frontend: cada vez que algo llega a staging compila
-# el react y renueva la pagina en la ec2. el backend se despliega solo desde
-# su propio repo, cada uno lo suyo. tambien corre con el boton run workflow.
+# deploy del front, el backend se sube desde su repo
 
 on:
   push:
@@ -13,7 +11,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # bajar el codigo del frontend (solo este repo)
       - name: bajar el codigo
         uses: actions/checkout@v4
 
@@ -28,9 +25,8 @@ jobs:
           npm ci
           npm run build
         env:
-          # en la ec2 la pagina vive en la raiz, no en /KIWI-GANG/ como en pages
+          # en la ec2 la pagina va en la raiz
           VITE_BASE: /
-          # la url del api: la misma ec2, en el puerto 8080
           VITE_API_URL: http://${{ secrets.EC2_HOST }}:8080/api/v1
 
       - name: subir la pagina a la ec2 y desplegar
@@ -38,22 +34,17 @@ jobs:
           EC2_HOST: ${{ secrets.EC2_HOST }}
           EC2_KEY: ${{ secrets.EC2_KEY }}
         run: |
-          # si todavia no estan los secrets no se cae, solo avisa
           if [ -z "$EC2_HOST" ] || [ -z "$EC2_KEY" ]; then
-            echo "faltan los secrets de la ec2, no se despliega (ver el readme)"
+            echo "faltan los secrets de la ec2 (ver el readme)"
             exit 0
           fi
-
-          # la llave pem va en un archivo para que la usen scp y ssh
           echo "$EC2_KEY" > llave.pem
           chmod 600 llave.pem
 
-          # se borra la pagina de antes y se suben la nueva y el script
           ssh -i llave.pem -o StrictHostKeyChecking=no ec2-user@$EC2_HOST "rm -rf /home/ec2-user/front"
           scp -r -i llave.pem -o StrictHostKeyChecking=no KiwiExpress/dist ec2-user@$EC2_HOST:/home/ec2-user/front
           scp -i llave.pem -o StrictHostKeyChecking=no deploy/desplegar.sh ec2-user@$EC2_HOST:/home/ec2-user/desplegar.sh
 
-          # el script renueva el contenedor de nginx
           ssh -i llave.pem -o StrictHostKeyChecking=no ec2-user@$EC2_HOST "bash desplegar.sh"
 
           rm llave.pem

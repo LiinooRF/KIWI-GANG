@@ -51,6 +51,13 @@ cada repo despliega lo suyo a la ec2 automaticamente cuando algo llega a staging
 los dos tambien se pueden lanzar a mano con el boton "run workflow" de la pestaña
 actions, y los dos instalan docker solos si la maquina es nueva.
 
+### el boton de deploy completo
+
+ademas hay un tercer workflow en este repo, "Deploy completo a AWS", que no corre
+solo nunca: es un boton para subir TODO de una (backend, frontend y base de datos).
+sirve para dejar una maquina nueva lista con una sola corrida, o para partir de cero.
+ojo que borra los tres contenedores, o sea la base parte vacia.
+
 ### secrets en github (en este repo)
 
 en settings > secrets and variables > actions:
