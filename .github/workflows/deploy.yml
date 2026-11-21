@@ -1,0 +1,86 @@
+name: Deploy a AWS
+
+# este es el unico workflow que despliega el proyecto completo a la ec2:
+# el backend (spring boot), el frontend (react) y la base de datos (mysql).
+# corre solo cuando algo llega a staging, o a mano con el boton "run workflow".
+
+on:
+  push:
+    branches: [staging]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # paso 1: bajar el codigo del frontend (este repo)
+      - name: bajar el frontend
+        uses: actions/checkout@v4
+
+      # paso 2: bajar el codigo del backend (el otro repo, es publico)
+      - name: bajar el backend
+        uses: actions/checkout@v4
+        with:
+          repository: LiinooRF/KIWI-GANG-API
+          path: api
+
+      # paso 3: instalar node y compilar el frontend
+      - name: instalar node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: compilar el frontend
+        run: |
+          cd KiwiExpress
+          npm ci
+          npm run build
+        env:
+          # en la ec2 la pagina vive en la raiz, no en /KIWI-GANG/ como en pages
+          VITE_BASE: /
+          # la url del api: la misma ec2, en el puerto 8080
+          VITE_API_URL: http://${{ secrets.EC2_HOST }}:8080/api/v1
+
+      # paso 4: instalar java y armar el jar del backend
+      # (los tests ya corrieron en el pull request, aca no hace falta repetirlos)
+      - name: instalar java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: compilar el backend
+        run: |
+          cd api
+          chmod +x mvnw
+          ./mvnw package -B -ntp -DskipTests
+
+      # paso 5: subir el jar y la pagina a la ec2, y correr el script que levanta todo
+      - name: subir todo y desplegar
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_KEY: ${{ secrets.EC2_KEY }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        run: |
+          # si todavia no estan los secrets no se cae, solo avisa y no despliega
+          if [ -z "$EC2_HOST" ] || [ -z "$EC2_KEY" ]; then
+            echo "faltan los secrets de la ec2, no se despliega (ver el readme)"
+            exit 0
+          fi
+
+          # la llave pem va en un archivo para que la usen scp y ssh
+          echo "$EC2_KEY" > llave.pem
+          chmod 600 llave.pem
+
+          # se borra la pagina de antes y se suben los tres archivos:
+          # el jar del backend, la pagina compilada y el script de deploy
+          ssh -i llave.pem -o StrictHostKeyChecking=no ec2-user@$EC2_HOST "rm -rf /home/ec2-user/front"
+          scp -i llave.pem -o StrictHostKeyChecking=no api/target/*.jar ec2-user@$EC2_HOST:/home/ec2-user/kiwiapi.jar
+          scp -r -i llave.pem -o StrictHostKeyChecking=no KiwiExpress/dist ec2-user@$EC2_HOST:/home/ec2-user/front
+          scp -i llave.pem -o StrictHostKeyChecking=no deploy/desplegar.sh ec2-user@$EC2_HOST:/home/ec2-user/desplegar.sh
+
+          # el script levanta mysql, la api y la pagina, todo con docker
+          ssh -i llave.pem -o StrictHostKeyChecking=no ec2-user@$EC2_HOST "DB_PASSWORD='$DB_PASSWORD' JWT_SECRET='$JWT_SECRET' bash desplegar.sh"
+
+          rm llave.pem
