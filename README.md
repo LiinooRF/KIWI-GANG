@@ -41,26 +41,36 @@ Los mockups del sitio los hicimos en Figma antes de programar y estan en la carp
 
 El sitio esta publicado en https://liinoorf.github.io/KIWI-GANG/
 
-## Publicar en AWS (learner lab)
+## Deploy a AWS (learner lab)
 
-Todo el proyecto queda en una sola EC2 con docker: el frontend con nginx en el puerto 80 y el
-backend con mysql en el 8080. Como preparar la EC2 esta explicado en el README del repo
-KIWI-GANG-API (solo hay que instalar docker).
+Todo el proyecto se despliega con UN solo workflow desde este repo:
+`.github/workflows/deploy.yml`. Compila el frontend y el backend (lo baja del repo
+KIWI-GANG-API), y sube todo a una sola EC2 con docker: la pagina con nginx en el
+puerto 80, la api en el 8080 y mysql adentro. Corre solo cuando algo llega a staging,
+o a mano con el boton "run workflow" de la pestaña actions.
 
-El workflow `.github/workflows/aws.yml` compila el react y lo sube a la EC2 cada vez que algo
-llega a staging, borrando la version anterior. En los pull request no corre.
-
-En settings > secrets and variables > actions de este repo van dos secrets:
+En settings > secrets and variables > actions de ESTE repo van los cuatro secrets:
 
 - `EC2_HOST`: la ip publica de la instancia
 - `EC2_KEY`: el contenido completo de `labsuser.pem`
+- `DB_PASSWORD`: la clave que va a tener mysql, cualquiera
+- `JWT_SECRET`: la clave para firmar los token del login, 32 caracteres o mas
 
-Si faltan el workflow avisa y no publica. La IP de la EC2 se deja fija con una elastic ip
-(explicado en el README del repo KIWI-GANG-API), asi prender la maquina un dia normal no
-requiere tocar nada aca. Solo si la IP llegara a cambiar hay que actualizar `EC2_HOST` en los
-dos repos y correr el workflow de nuevo, porque la url del api queda escrita al compilar.
+Si faltan los secrets el workflow avisa y no despliega.
 
-Para correrlo en local se copia `KiwiExpress/.env.example` como `.env`.
+### preparar una ec2 (cualquiera sirve)
+
+1. crear una instancia amazon linux 2023 con el key pair `vockey`
+2. abrir los puertos 22 (ssh), 80 (la pagina) y 8080 (la api)
+3. asociarle una elastic ip para que la ip no cambie al reiniciar (opcional pero recomendado)
+
+Docker no hay que instalarlo, lo instala el deploy solo si falta. Despues de eso,
+cada push a staging o cada boton de "run workflow" deja todo arriba. Como la base
+parte vacia en cada deploy, la api sola carga los usuarios y productos de prueba.
+
+Si se cambia la ip de la ec2, actualizar `EC2_HOST` y apretar run workflow de nuevo.
+
+Para correr el frontend en local se copia `KiwiExpress/.env.example` como `.env`.
 
 ## Organizacion del trabajo
 
