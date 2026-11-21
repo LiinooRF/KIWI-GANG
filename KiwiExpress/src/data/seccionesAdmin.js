@@ -7,8 +7,8 @@ import { ROLES } from "../js/permisos";
 // sección nueva, basta con sumarla aquí.
 export const secciones = [
     { ruta: '/admin', texto: 'Inicio', icono: '🏠', roles: [ROLES.ADMIN] },
-    { ruta: '/admin/ordenes', texto: 'Órdenes', icono: '🧾', roles: [ROLES.ADMIN, ROLES.OPERARIO] },
-    { ruta: '/admin/productos', texto: 'Productos', icono: '📦', roles: [ROLES.ADMIN, ROLES.OPERARIO] },
+    { ruta: '/admin/ordenes', texto: 'Órdenes', icono: '🧾', roles: [ROLES.ADMIN, ROLES.VENDEDOR] },
+    { ruta: '/admin/productos', texto: 'Productos', icono: '📦', roles: [ROLES.ADMIN, ROLES.VENDEDOR] },
     { ruta: '/admin/categorias', texto: 'Categorías', icono: '🏷️', roles: [ROLES.ADMIN] },
     { ruta: '/admin/reportes', texto: 'Reportes', icono: '📊', roles: [ROLES.ADMIN] },
     { ruta: '/admin/usuarios', texto: 'Usuarios', icono: '👤', roles: [ROLES.ADMIN] }
