@@ -1,7 +1,7 @@
 //Roles de usuario a considerar para la vista permitida.
 export const ROLES = {
     ADMIN: 'administrador',
-    OPERARIO: 'operario',
+    VENDEDOR: 'vendedor',
     CLIENTE: 'cliente'
 };
 
