@@ -1,15 +1,60 @@
 import { useParams, Link } from 'react-router-dom'
-import { useState } from 'react'
-import { buscarProductoPorId } from '../data/db.js'
+import { useState, useEffect } from 'react'
+import { pedirApi } from '../data/auth.js'
 import { useCarrito } from '../context/CarritoContext.jsx'
 
 function DetalleProducto() {
   const { id } = useParams()
-  const producto = buscarProductoPorId(id)
+  // el producto llega del api, parte en null hasta tener respuesta
+  const [producto, setProducto] = useState(null)
+  const [cargando, setCargando] = useState(true)
+  // error de conexion con el api, es distinto a que el producto no exista
+  const [errorCarga, setErrorCarga] = useState('')
   const { carrito, agregarAlCarrito } = useCarrito()
   const [cantidad, setCantidad] = useState(1)
   const [mensaje, setMensaje] = useState('')
   const [error, setError] = useState('')
+
+  // el [id] hace que se vuelva a pedir si cambia el id de la url
+  useEffect(() => {
+    async function cargarProducto() {
+      try {
+        const respuesta = await pedirApi('/productos/' + id)
+        // 404 quiere decir que no existe, queda en null y se muestra producto no encontrado
+        if (respuesta.status === 404) {
+          setProducto(null)
+          return
+        }
+        if (!respuesta.ok) {
+          throw new Error('el api respondio con error')
+        }
+        const datos = await respuesta.json()
+        setProducto(datos)
+      } catch {
+        setErrorCarga('No se pudo cargar el producto. Intenta más tarde.')
+      } finally {
+        setCargando(false)
+      }
+    }
+    cargarProducto()
+  }, [id])
+
+  if (cargando) {
+    return (
+      <div className="formulario">
+        <p>Cargando producto...</p>
+      </div>
+    )
+  }
+
+  if (errorCarga) {
+    return (
+      <div className="formulario">
+        <p className="error">{errorCarga}</p>
+        <Link to="/productos" className="boton">Volver a Productos</Link>
+      </div>
+    )
+  }
 
   if (!producto) {
     return (
