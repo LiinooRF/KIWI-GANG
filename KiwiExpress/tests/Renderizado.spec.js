@@ -38,12 +38,17 @@ describe('Pruebas de renderizado Karma', () => {
     expect(screen.getByText(new RegExp(precioProducto.toString()))).toBeTruthy();
   });
 
-  it('Debe mostrar todos los elementos de la lista de productos', () => {
+  it('Debe mostrar todos los elementos de la lista de productos', async () => {
     // Obtenemos el arreglo real del archivo db.js
     const productosDeLaBaseDeDatos = listarProductos();
     const cantidadEsperada = productosDeLaBaseDeDatos.length;
 
-    const { getAllByRole } = render(
+    // en las pruebas no hay backend, asi que se simula la respuesta del api con los datos de db.js
+    spyOn(window, 'fetch').and.returnValue(
+      Promise.resolve(new Response(JSON.stringify(productosDeLaBaseDeDatos)))
+    );
+
+    const { findAllByRole } = render(
       <MemoryRouter>
         <CarritoProvider>
           <Productos />
@@ -52,7 +57,8 @@ describe('Pruebas de renderizado Karma', () => {
     );
 
     //Renderiza una cantidad de titulos (unicos con etiqueta h5) y los compara con la cantidad esperada de productos totales.
-    const titulosRenderizados = getAllByRole('heading', { level: 5 });
+    // findAll espera a que lleguen los datos, getAll buscaria al tiro y no encontraria nada
+    const titulosRenderizados = await findAllByRole('heading', { level: 5 });
     expect(titulosRenderizados.length).toBe(cantidadEsperada);
   });
 
@@ -94,4 +100,3 @@ describe('Pruebas de renderizado Karma', () => {
     expect(htmlTarjeta.includes('no disponible') || htmlTarjeta.includes('añadir al carrito')).toBeTruthy();
   });
 });
-

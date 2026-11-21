@@ -8,7 +8,7 @@ import { esAdmin } from '../js/permisos';
 const pesos = (n) => '$' + n.toLocaleString('es-CL')
 
 function AdminProductos() {
- //Estas constantes se usan para definir si el usuairo puede gestionar el inventario (admin) o no (operario)
+ //Estas constantes se usan para definir si el usuairo puede gestionar el inventario (admin) o no (vendedor)
   const { usuario } = useAuth();
   const puedeGestionar = esAdmin(usuario?.rol);
 

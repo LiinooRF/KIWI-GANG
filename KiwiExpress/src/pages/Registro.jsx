@@ -1,11 +1,14 @@
 import { useState, useRef } from "react";
 import comunas from "../js/comunas";
 import {validarContraseñas, validarFormulario} from "../js/val_registro";
+import { registrarApi } from "../data/auth.js";
 function Registro() {
   const [validated, setValidated] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordVerify, setPasswordVerify] = useState("");
   const [registroExitoso, setRegistroExitoso] = useState(false);
+  //mensaje de error si el api rechaza el registro
+  const [errorRegistro, setErrorRegistro] = useState("");
 
   //una variable referencial que mas tarde se le da a la verificacion de la password.
   const passwordVerifyRef = useRef(null);
@@ -36,7 +39,31 @@ function Registro() {
       return;
     }
 
-    setRegistroExitoso(true);
+    //Se manda la cuenta al api. El select guarda el id de la comuna, asi que se busca su nombre.
+    const enviarRegistro = async () => {
+      const idComuna = formulario.comuna.value;
+      const comunaElegida = comunas.find((c) => String(c.id_comuna) === idComuna);
+
+      const error = await registrarApi({
+        run: formulario.rut.value,
+        nombre: formulario.nombre.value,
+        apellidos: formulario.apellidos.value,
+        correo: formulario.email.value,
+        contrasena: password,
+        comuna: comunaElegida ? comunaElegida.nombre_comuna : idComuna
+      })
+
+      if (error) {
+        setErrorRegistro(error)
+        setRegistroExitoso(false)
+        return
+      }
+
+      setErrorRegistro("")
+      setRegistroExitoso(true)
+    }
+
+    enviarRegistro();
   };
     return (
         <>
@@ -176,6 +203,9 @@ function Registro() {
           </div>
             <button className="btn btn-success mt-4" type="submit">Registrarse</button>
 
+          <div className={errorRegistro ? "alert alert-danger mt-3" : "alert alert-danger mt-3 d-none"} role="alert">
+            {errorRegistro}
+          </div>
           <div id="registroExitoso"   className={registroExitoso ? "alert alert-success mt-3": "alert alert-success mt-3 d-none"} role="alert">
             Usuario registrado correctamente (Test).
           </div>

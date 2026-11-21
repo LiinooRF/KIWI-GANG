@@ -127,7 +127,7 @@ describe('Pruebas de estado y eventos', () => {
     expect(queryByText(/vacío/i)).toBeTruthy()
   })
 
-  it('Filtra los productos mientras el usuario escribe en la búsqueda', () => {
+  it('Filtra los productos mientras el usuario escribe en la búsqueda', async () => {
     const productos = listarProductos()
     const buscado = productos[0]
     // Un producto cuyo nombre NO contiene lo buscado: debería desaparecer al filtrar.
@@ -135,7 +135,12 @@ describe('Pruebas de estado y eventos', () => {
     // si cambian los productos.
     const otro = productos.find((p) => !p.nombre.includes(buscado.nombre))
 
-    const { getByPlaceholderText, queryByRole } = render(
+    // se simula la respuesta del api porque en las pruebas no hay backend
+    spyOn(window, 'fetch').and.returnValue(
+      Promise.resolve(new Response(JSON.stringify(productos)))
+    )
+
+    const { getByPlaceholderText, queryByRole, findByRole } = render(
       <MemoryRouter>
         <CarritoProvider>
           <Productos />
@@ -144,7 +149,8 @@ describe('Pruebas de estado y eventos', () => {
     )
 
     // Antes de escribir se ven los dos (el nombre de cada tarjeta es un <h5>, rol 'heading')
-    expect(queryByRole('heading', { name: otro.nombre })).toBeTruthy()
+    // se usa findBy para esperar a que lleguen los productos del api
+    expect(await findByRole('heading', { name: otro.nombre })).toBeTruthy()
 
     fireEvent.change(getByPlaceholderText('Buscar producto...'), { target: { value: buscado.nombre } })
 
