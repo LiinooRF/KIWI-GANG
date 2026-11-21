@@ -116,5 +116,5 @@ export const usuarios = [
   { id: 1, run: "123456789", nombre: "Catalina", apellidos: "Soto", correo: "catalinasoto@gmail.com", contrasena: "ctr123", comuna: "Providencia", rol: "cliente" },
   { id: 2, run: "987654321", nombre: "Diego", apellidos: "López", correo: "diegolopez@gmail.com", contrasena: "ctr456", comuna: "Las Condes", rol: "cliente" },
   { id: 3, run: "112223334", nombre: "Rodrigo", apellidos: "Fuentes", correo: "rodrigofuentes@duoc.cl", contrasena: "admin123", comuna: "Santiago", rol: "administrador" },
-  { id: 4, run: "445556667", nombre: "Javiera", apellidos: "Díaz", correo: "javieradiaz@duoc.cl", contrasena: "oper123", comuna: "Ñuñoa", rol: "operario" }
+  { id: 4, run: "445556667", nombre: "Javiera", apellidos: "Díaz", correo: "javieradiaz@duoc.cl", contrasena: "oper123", comuna: "Ñuñoa", rol: "vendedor" }
 ];
